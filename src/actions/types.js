@@ -1,0 +1,5 @@
+export const CREATE_TOUR = "CREATE_TOUR";
+export const RETRIEVE_TOUR = "RETRIEVE_TOUR";
+export const UPDATE_TOUR = "UUPDATE_TOUR";
+export const DELETE_TOUR = "DELETE_TOUR";
+export const DELETE_ALL_TOURS = "DELETE_ALL_TOURS";
