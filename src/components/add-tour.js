@@ -76,7 +76,7 @@ class AddTour extends Component {
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
-            <h4>You submitted successfully!</h4>
+            <h4>Seu pacote foi adicionado com sucesso!</h4>
             <button className="btn btn-success" onClick={this.newTour}>
               Add
             </button>
@@ -84,7 +84,7 @@ class AddTour extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Título</label>
               <input
                 type="text"
                 className="form-control"
@@ -97,7 +97,7 @@ class AddTour extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Descrição</label>
               <input
                 type="text"
                 className="form-control"
@@ -110,7 +110,7 @@ class AddTour extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Preço</label>
               <input
                 type="text"
                 className="form-control"
@@ -123,7 +123,7 @@ class AddTour extends Component {
             </div>
 
             <button onClick={this.saveTour} className="btn btn-success">
-              Submit
+              Adicionar
             </button>
           </div>
         )}

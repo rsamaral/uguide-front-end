@@ -68,8 +68,6 @@ class TourList extends Component {
   render() {
     const { searchTitle, currentTour, currentIndex } = this.state;
     const { tours } = this.props;
-    console.log(this.props)
-    console.log(this.state)
 
     return (
       <div className="list row">
@@ -78,7 +76,7 @@ class TourList extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Search by title"
+            placeholder="Pesquise pelo título"
             value={searchTitle}
             onChange={this.onChangeSearchTitle}
           />
@@ -88,14 +86,14 @@ class TourList extends Component {
               type="button"
               onClick={this.findByTitle}
             >
-              Search
+              Pesquisar
 
             </button>
           </div>
         </div>
       </div>
       <div className="col-md-6">
-        <h4>Tour List</h4>
+        <h4>Lista de Passeios</h4>
 
         <ul className="list-group">
           {tours &&
@@ -117,28 +115,28 @@ class TourList extends Component {
           className="m-3 btn btn-sm btn-danger"
           onClick={this.removeAllTour}
         >
-          Remove All
+          Excluir Pacotes
         </button>
       </div>
       <div className="col-md-6">
         {currentTour ? (
           <div>
-            <h4>Tour</h4>
+            <h4>Passeios</h4>
             <div>
               <label>
-                <strong>Title:</strong>
+                <strong>Título:</strong>
               </label>{" "}
               {currentTour.title}
             </div>
             <div>
               <label>
-                <strong>Description:</strong>
+                <strong>Descrição:</strong>
               </label>{" "}
               {currentTour.description}
             </div>
             <div>
               <label>
-                <strong>Price:</strong>
+                <strong>Preço:</strong>
               </label>{" "}
               {currentTour.price}
             </div>
@@ -147,13 +145,13 @@ class TourList extends Component {
               to={"/tour/" + currentTour.id}
               className="badge badge-warning"
             >
-              Edit
+              Editar Passeio
             </Link>
           </div>
         ) : (
           <div>
             <br />
-            <p>Please click on a Tour...</p>
+            <p>Escolha o passeio desejado.</p>
           </div>
         )}
       </div>

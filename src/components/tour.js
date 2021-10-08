@@ -107,10 +107,10 @@ class Tour extends Component {
       <div>
       {currentTour ? (
         <div className="edit-form">
-          <h4>Tour</h4>
+          <h4>Passeio</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Título</label>
               <input
                 type="text"
                 className="form-control"
@@ -120,7 +120,7 @@ class Tour extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Descrição</label>
               <input
                 type="text"
                 className="form-control"
@@ -131,7 +131,7 @@ class Tour extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Preço</label>
               <input
                 type="text"
                 className="form-control"
@@ -146,7 +146,7 @@ class Tour extends Component {
             className="badge badge-danger mr-2"
             onClick={this.removeTour}
           >
-            Delete
+            Excluir passeio
           </button>
 
           <button
@@ -154,14 +154,14 @@ class Tour extends Component {
             className="badge badge-success"
             onClick={this.updateContent}
           >
-            Update
+            Atualizar
           </button>
           <p>{this.state.message}</p>
         </div>
       ) : (
         <div>
           <br />
-          <p>Please click on a Tour...</p>
+          <p>Clique no Passeio desejado.</p>
         </div>
       )}
     </div> 
