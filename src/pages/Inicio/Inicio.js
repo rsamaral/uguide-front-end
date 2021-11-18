@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Img, MainContainer, GlobalStyle} from "./Styled.js"
+import { Img, MainContainer, GlobalStyle, Header} from "./styles.js"
 import Images from "../../assets/images/Images.js"
 
 export const Home = () => {
@@ -7,7 +7,7 @@ export const Home = () => {
       <Fragment>
         <GlobalStyle />
         <MainContainer>
-          <h1>Tenha acesso aos melhores passeios em uma só plataforma!</h1>
+          <Header>Tenha acesso aos melhores passeios em uma só plataforma!</Header>
           <Img src={Images.gramado} alt={"Gramado"} />
         </MainContainer>  
       </Fragment>
