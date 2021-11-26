@@ -6,7 +6,7 @@ import {
   DELETE_ALL_TOURS
 } from "./types"
 
-import TourDataService from "../services/tour.service"
+import TourDataService from "../../services/tour.service"
 
 export const createTour = (title, description, price) => async (dispatch) => {
   try {
@@ -87,6 +87,8 @@ export const findTourByTitle = (title) => async (dispatch) => {
       type: RETRIEVE_TOUR,
       payload: res.data,
     });
+
+    console.log(res.data)
   } catch (err) {
     console.log(err);
   }

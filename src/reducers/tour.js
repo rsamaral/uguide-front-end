@@ -4,7 +4,7 @@ import {
   UPDATE_TOUR,
   DELETE_TOUR,
   DELETE_ALL_TOURS
-} from "../actions/types"
+} from "../actions/uguide-actions/types"
 
 const initialState = [];
 

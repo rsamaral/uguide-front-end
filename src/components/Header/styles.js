@@ -1,4 +1,5 @@
 import styled from "styled-components"; 
+import Avatar from 'react-avatar';
 import { NavLink as Link } from "react-router-dom";
 
 export const Nav = styled.nav`
@@ -64,4 +65,36 @@ export const NavMenu = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
+`
+
+export const NavBtnAvatar = styled.nav`
+  height: 38px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #E5E5E5;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 20px 30px 0px 0px;
+  font-weight: bold;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
+
+
+export const NavBtnLinkAvatar = styled(Link)`
+  color: black;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+`;
+
+export const AvatarUser = styled(Avatar)`
+  cursor: pointer;
+  width: 50px !important;
+  height: 50px !important;
+`

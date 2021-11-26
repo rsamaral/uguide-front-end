@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateTour, deleteTour } from "../actions/tour";
+import { updateTour, deleteTour } from "../actions/uguide-actions/tour";
 import TourDataService from "../services/tour.service";
 
 class Tour extends Component {

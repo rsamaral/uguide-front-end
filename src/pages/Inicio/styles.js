@@ -21,8 +21,9 @@ export const MainContainer = styled.div`
 
 export const Img = styled.img`
   height: 400px;
-  width: 600px;
-  margin-top: 50px;
+  width: 80%;
+  border-radius: 40px;
+  margin-top: 20px;
 `
 
 export const Header = styled.h1`
@@ -30,4 +31,15 @@ export const Header = styled.h1`
   justify-content: center;
   align-items: center;
   font-size: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`
+
+export const HeaderSearch = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 0px;
+  margin-top: 10px;
 `

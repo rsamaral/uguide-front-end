@@ -26,9 +26,9 @@ export const FormInput = styled.input`
   justify-content: center;
   height: 50px;
   width: 500px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 5px gray;
-  border-radius: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
 `
 
 export const FormMessage = styled.textarea`
@@ -36,9 +36,9 @@ export const FormMessage = styled.textarea`
   justify-content: center;
   height: 250px;
   width: 500px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 5px gray;
-  border-radius: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
 `
 
 export const FormBtn = styled.button`
@@ -50,7 +50,7 @@ export const FormBtn = styled.button`
   align-items: center;
   background: black;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 6px;
 `
 
 export const ErrorMessage = styled.p`

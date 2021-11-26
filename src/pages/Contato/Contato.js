@@ -71,7 +71,7 @@ export const Contato = () => {
                 message: 'Por favor, insira 30 caracteres ou menos.'
               }
             })}
-            placeholder='Nome' 
+            placeholder='  Nome' 
             />
             {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
             <FormInput
@@ -81,7 +81,7 @@ export const Contato = () => {
                 required: true,
                 pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
               })}
-              placeholder='Informe o seu e-mail.'
+              placeholder='  Informe o seu e-mail'
             />
             {errors.email && (
               <ErrorMessage>Por favor, insira um endereço de e-mail válido.</ErrorMessage>
@@ -96,7 +96,7 @@ export const Contato = () => {
                   message: 'Assunto não pode exceder 75 caracteres.'
                 }
               })}
-              placeholder='Assunto'
+              placeholder='  Assunto'
             />
             {errors.subject && (
               <ErrorMessage>{errors.subject.message}</ErrorMessage>
@@ -107,7 +107,7 @@ export const Contato = () => {
               {...register('message', {
                 required: true
               })}
-              placeholder='Mensagem'
+              placeholder='  Mensagem'
             />
             {errors.message && <ErrorMessage>Por favor, insira a mensagem.</ErrorMessage>}
             <FormBtn type='submit'>
