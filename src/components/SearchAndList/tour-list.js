@@ -3,7 +3,19 @@ import { connect } from "react-redux";
 import { retrieveTour, findTourByTitle, deleteAllTour } from "../../actions/uguide-actions/tour";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal/modal";
-import {SearchUL, MainContainer, Header, SearchListContainer, SearchListInput, SearchListBtn, SearchPasseiosTitle, Passeios, SearchList} from "./styles"
+import {
+  SearchUL, 
+  MainContainer, 
+  Header, 
+  SearchListContainer, 
+  SearchListInput, 
+  SearchListBtn, 
+  SearchPasseiosTitle, 
+  Passeios, 
+  SearchList,
+  ShowTours,
+  PasseiosInfo
+} from "./styles"
 
 export const TourList = (props) => {
     const [currentTour, setCurrentTour] = useState(null);
@@ -65,27 +77,28 @@ export const TourList = (props) => {
               Pesquisar
             </SearchListBtn>
         </SearchListContainer>
+        {tours.length > 0 && (
+          <SearchPasseiosTitle>
+            Olhe o que encontramos pra você!
+          </SearchPasseiosTitle>
+        )}
+        <ShowTours>
+        <Passeios>
           {tours.length > 0 &&
             tours.map((tour, index) => (
-              <Passeios>
-                <SearchPasseiosTitle>
-                  Lista de Passeios
-                </SearchPasseiosTitle>
-                <SearchUL>
-                  <SearchList
-                    className={
-                      "list-group-item " +
-                      (index === currentIndex ? "active" : "")
-                    }
-                    onClick={() => setActiveTour(tour, index)}
-                    key={index}
-                  >
-                    {tour.title}
+              <SearchUL>
+                <SearchList
+                  style={{background: index === currentIndex ? "#E5E5E5" : ""}}
+                  onClick={() => setActiveTour(tour, index)}
+                  key={index}
+                >
+                  {tour.title}
                 </SearchList>
               </SearchUL>  
-              </Passeios>
+
             ))
-          }
+          } 
+        </Passeios>
         {/* <SearchListBtn
           className="m-3 btn btn-sm btn-danger"
           onClick={this.removeAllTour}
@@ -93,8 +106,7 @@ export const TourList = (props) => {
           Excluir Pacotes
         </SearchListBtn> */}
         {currentTour && (
-          <Passeios>
-            <h4>Passeios</h4>
+          <PasseiosInfo>
             <div>
               <label>
                 <strong>Título:</strong>
@@ -120,8 +132,9 @@ export const TourList = (props) => {
             >
               Editar Passeio
             </Link> */}
-          </Passeios>
+          </PasseiosInfo>
         )}
+        </ShowTours>
     </MainContainer>
     );
   }

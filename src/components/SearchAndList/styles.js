@@ -49,17 +49,29 @@ export const SearchPasseiosTitle = styled.h5`
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  margin-top: 50px;
 `
 
 export const Passeios = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  margin-top: 50px;
+  margin: 20px auto auto auto;
+`
+
+export const PasseiosInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
+  border-left: 1px solid #ced4da;
+  padding: 15px;
+  width: 300px;
 `
 
 export const SearchUL = styled.ul `
-  margin: auto auto auto -15px;
+  margin: 15px auto auto -10px;
   padding: 0px important;
 `
 
@@ -68,10 +80,17 @@ export const SearchList = styled.li`
   align-items: center;
   justify-content: center;
   height: 40px;
-  width: 700px;
-  margin-bottom: 20px;
+  width: 400px;
   border-radius: 6px !important;
   border: 1px solid #ced4da;
   cursor: pointer;
+  font-weight: bold;
+  margin: auto;
+`
 
+export const ShowTours = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  margin: auto;
 `

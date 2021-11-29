@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom"
-import { FormLogin, InputLogin, BtnLogin, MainContainer, ErrorMessage, Header } from "./styles";
+import { FormLogin, InputLogin, BtnLogin, MainContainer, ErrorMessage, Header, ForgetLink, BtnContainer} from "./styles";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth-actions/auth";
 
@@ -109,7 +109,7 @@ class Login extends Component {
               />
             </div>
 
-            <div>
+            <BtnContainer>
               <BtnLogin
                 disabled={this.state.loading}
               >
@@ -118,7 +118,8 @@ class Login extends Component {
                 )}
                 <span>Login</span>
               </BtnLogin>
-            </div>
+              <ForgetLink to={"#"}>Esqueci minha Senha</ForgetLink>
+            </BtnContainer>
 
             <BtnLogin
               style={{ display: "none" }}

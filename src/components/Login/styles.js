@@ -2,6 +2,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import styled from "styled-components"; 
+import { NavLink as Link } from "react-router-dom";
 
 
 export const MainContainer = styled.div`
@@ -51,5 +52,18 @@ export const BtnLogin = styled(CheckButton)`
 export const ErrorMessage = styled.p`
   margin-top: -15px;
   font-size: 12px;
-  color: red
+  color: red;
+`
+
+export const ForgetLink = styled(Link)`
+  color: black;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+`
+
+export const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

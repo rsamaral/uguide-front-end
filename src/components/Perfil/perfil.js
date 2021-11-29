@@ -19,6 +19,11 @@ class Perfil extends Component {
       window.location.reload();
     }
 
+    function buscarOnClick() {
+      history.push("/List")
+      window.location.reload();
+    }
+
     if (!currentUser) {
       return <Redirect to="/LoginPage" />;
     }
@@ -91,7 +96,7 @@ class Perfil extends Component {
                   <BtnCard onClick={meuCadastroOnClick}>
                     Meu Cadastro
                   </BtnCard>
-                  <BtnCard>
+                  <BtnCard onClick={buscarOnClick}>
                     Buscar Novo Passeio
                   </BtnCard>
                 </BtnContainer>
