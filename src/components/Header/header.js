@@ -10,12 +10,15 @@ import Cadastro from "../../pages/Cadastro/cadastro";
 import Login from "../../pages/Login/login"
 import Contato from "../../pages/Contato/contato";
 import AddTour from "../../components/AdicionarPasseio/add-tour"
+import Tour from "../../components/tour"
 import {Nav, NavBtn, NavLink, NavBtnLinkB, NavBtnLinkW, NavMenu, AvatarUser, NavBtnLinkAvatar, NavBtnAvatar} from "./styles"
 import { logout } from "../../actions/auth-actions/auth";
 import { clearMessage } from "../../actions/auth-actions/message";
 
 import { history } from '../../helpers/history';
 import MeuCadastro from "../../pages/MeuCadastro/meucadastro";
+import MeusPacotes from "../../pages/MeusPacotes/meusPacotes"
+import MeusPagamentos from "../../pages/MeusPagamentos/MeusPagamentos"
 
 class Header extends Component {
   constructor(props) {
@@ -126,7 +129,13 @@ class Header extends Component {
               <Route exact path={["/MeuCadastro"]}>
                 <MeuCadastro />
               </Route>
-              {/* <Route path="/tour/:id" component={Tour} /> */}
+              <Route exact path={["/MeusPacotes"]}>
+                <MeusPacotes />
+              </Route>
+              <Route exact path={["/MeusPagamentos"]}>
+                <MeusPagamentos />
+              </Route>
+              <Route path="/tour/:id" component={Tour} />
             </Switch>
           </div> 
         </Fragment> 

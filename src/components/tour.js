@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateTour, deleteTour } from "../actions/uguide-actions/tour";
+import { findTourById, retrieveTour, updateTour, deleteTour } from "../actions/uguide-actions/tour";
 import TourDataService from "../services/tour.service";
+
 
 class Tour extends Component {
   constructor(props) {
@@ -9,23 +10,27 @@ class Tour extends Component {
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
-    this.getTour = this.getTour.bind(this);
+    this.findTourById = this.findTourById.bind(this);
     this.updateContent = this.updateContent.bind(this);
     this.removeTour = this.removeTour.bind(this);
 
     this.state = {
       currentTour: {
-        id: null,
+        id: "null",
         title: "",
         description: "",
+        data: "",
         price: "",
+        city: "",
+        time: "",
+        guide: "",
       },
       message: "",
     };
   }
 
   componentDidMount() {
-    this.getTour(this.props.match.params.id);
+    this.findTourById(this.props.match.params.id);
   }
 
   onChangeTitle(e) {
@@ -63,24 +68,24 @@ class Tour extends Component {
     }));
   }
 
-  getTour(id) {
-    TourDataService.get(id)
-      .then((response) => {
-        this.setState({
-          currentTour: response.data,
-        });
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
+  findTourById(id) {
+    TourDataService.findById(id)
+    .then((response) => {
+      this.setState({
+        currentTour: response.data,
       });
+      console.log(response.data);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
   }
 
   updateContent() {
     this.props
       .updateTour(this.state.currentTour.id, this.state.currentTour)
-      .then((reponse) => {
-        console.log(reponse);
+      .then((response) => {
+        console.log(response);
         
         this.setState({ message: "The tutorial was updated successfully!" });
       })
@@ -170,4 +175,10 @@ class Tour extends Component {
   }
 }
 
-export default connect(null, { updateTour, deleteTour })(Tour);
+const mapStateToProps = (state) => {
+  return {
+    tours: state.tours,
+  };
+};
+
+export default connect(mapStateToProps, { retrieveTour, updateTour, deleteTour })(Tour);

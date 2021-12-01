@@ -4,11 +4,15 @@ import { createTour } from "../../actions/uguide-actions/tour";
 import { MainContainer, Header, FormAddInput, FormAddContent, FormAddBtn, FormAddDesc } from "./styles";
 
 class AddTour extends Component {
+  
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
+    this.onChangeCity = this.onChangeCity.bind(this);
+    this.onChangeData = this.onChangeData.bind(this);
+    this.onChangeTime = this.onChangeTime.bind(this);
     this.saveTour = this.saveTour.bind(this);
     this.newTour = this.newTour.bind(this);
 
@@ -17,7 +21,10 @@ class AddTour extends Component {
       title: "",
       description: "",
       data: "",
+      city: "",
+      time: "",
       price: "",
+      guide: "",
       submitted: false,
     };
   }
@@ -40,18 +47,43 @@ class AddTour extends Component {
     });
   }
 
+  onChangeCity(e) {
+    this.setState({
+      city: e.target.value,
+    });
+  }
+
+  onChangeTime(e) {
+    this.setState({
+      time: e.target.value,
+    });
+  }
+
+  onChangeData(e) {
+    this.setState({
+      data: e.target.value,
+    });
+  }
+
   saveTour() {
-    const { title, description, price} = this.state;
+    const { title, description, price, data, time, city} = this.state;
+
+    const { user: currentUser} = this.props;
+
+    const guide = currentUser.id;
 
     this.props
-      .createTour(title, description, price)
+      .createTour(title, description, price, guide, data, time, city)
       .then((data) => {
         this.setState({
           id: data.id,
           title: data.title,
           description: data.description,
           price: data.price,
-
+          guide: data.guide,
+          data: data.data,
+          city: data.city,
+          time: data.time,
           submitted: true,
         });
         console.log(data)
@@ -68,7 +100,7 @@ class AddTour extends Component {
       description: "",
       price: "",
       data: "",
-
+      guide: "",
       submitted: false,
     });
   }  
@@ -115,6 +147,36 @@ class AddTour extends Component {
               name="price"
             />
 
+            <FormAddInput
+              type="text"
+              placeholder="Data"
+              id="data"
+              required
+              value={this.state.data}
+              onChange={this.onChangeData}
+              name="data"
+            />
+
+            <FormAddInput
+              type="text"
+              placeholder="Cidade"
+              id="city"
+              required
+              value={this.state.city}
+              onChange={this.onChangeCity}
+              name="city"
+            />
+
+            <FormAddInput
+              type="text"
+              placeholder="Horário"
+              id="time"
+              required
+              value={this.state.time}
+              onChange={this.onChangeTime}
+              name="time"
+            />
+
             <FormAddBtn onClick={this.saveTour}>
               Adicionar
             </FormAddBtn>
@@ -122,9 +184,15 @@ class AddTour extends Component {
         )}
       </FormAddContent>
       </MainContainer>
-     
     )
   }
 }
 
-export default connect(null, { createTour })(AddTour);
+function mapStateToProps(state) {
+  const { user } = state.auth;
+  return {
+    user,
+  };
+}
+
+export default connect(mapStateToProps, { createTour })(AddTour);

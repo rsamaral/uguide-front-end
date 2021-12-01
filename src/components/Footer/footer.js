@@ -8,7 +8,6 @@ import {
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram'
 import TwitterIcon from '@material-ui/icons/Twitter'
-import LinkedinIcon from '@material-ui/icons/LinkedIn'
 
 const Footer = () => {
 return (

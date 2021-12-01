@@ -5,8 +5,8 @@ class TourDataService {
     return http.get("/tour");
   }
 
-  get(id){
-    return http.get(`/tour/${id}`);
+  get(guide){
+    return http.get(`/tour/${guide}`);
   }
 
   create(data){
@@ -27,6 +27,10 @@ class TourDataService {
 
   findByTitle(title){
     return http.get(`/tour?title=${title}`)
+  }
+
+  findById(id){
+    return http.get(`/tour/${id}`)
   }
 }
 

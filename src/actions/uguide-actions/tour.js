@@ -8,9 +8,9 @@ import {
 
 import TourDataService from "../../services/tour.service"
 
-export const createTour = (title, description, price) => async (dispatch) => {
+export const createTour = (title, description, price, guide, data, time, city) => async (dispatch) => {
   try {
-    const res = await TourDataService.create({ title, description, price });
+    const res = await TourDataService.create({ title, description, price, guide, data, time, city});
 
     dispatch({
       type: CREATE_TOUR,
@@ -82,6 +82,38 @@ export const deleteAllTour = () => async (dispatch) => {
 export const findTourByTitle = (title) => async (dispatch) => {
   try {
     const res = await TourDataService.findByTitle(title);
+
+    dispatch({
+      type: RETRIEVE_TOUR,
+      payload: res.data,
+    });
+
+    console.log(res.data)
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const findTourById = (id) => async (dispatch) => {
+  try {
+    const res = await TourDataService.findById(id);
+
+    dispatch({
+      type: RETRIEVE_TOUR,
+      payload: res.data,
+    });
+
+    console.log(res.data)
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+
+export const findByGuide = (guide) => async (dispatch) => {
+  try {
+    const res = await TourDataService.get(guide);
 
     dispatch({
       type: RETRIEVE_TOUR,

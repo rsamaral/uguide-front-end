@@ -1,8 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { retrieveTour, findTourByTitle, deleteAllTour } from "../../actions/uguide-actions/tour";
-import { Link } from "react-router-dom";
-import Modal from "../../components/Modal/modal";
 import {
   SearchUL, 
   MainContainer, 
@@ -56,6 +54,7 @@ export const TourList = (props) => {
   }
 
   const {tours} = props
+
 
     return (
       <MainContainer>
@@ -125,13 +124,24 @@ export const TourList = (props) => {
               </label>{" "}
               {currentTour.price}
             </div>
-
-            {/* <Link
-              to={"/tour/" + currentTour.id}
-              className="badge badge-warning"
-            >
-              Editar Passeio
-            </Link> */}
+            <div>
+              <label>
+                <strong>Data:</strong>
+              </label>{" "}
+              {currentTour.data}
+            </div>
+            <div>
+              <label>
+                <strong>Horário:</strong>
+              </label>{" "}
+              {currentTour.time}
+            </div>
+            <div>
+              <label>
+                <strong>Cidade:</strong>
+              </label>{" "}
+              {currentTour.city}
+            </div>
           </PasseiosInfo>
         )}
         </ShowTours>

@@ -19,8 +19,18 @@ class Perfil extends Component {
       window.location.reload();
     }
 
+    function meusPacotesOnClick () {
+      history.push("/MeusPacotes")
+      window.location.reload()
+    }
+
     function buscarOnClick() {
       history.push("/List")
+      window.location.reload();
+    }
+
+    function meusPagamentosOnClick() {
+      history.push("/MeusPagamentos")
       window.location.reload();
     }
 
@@ -47,13 +57,13 @@ class Perfil extends Component {
                   {currentUser.fullname}
                 </NomeCard>
                 <BtnContainer>
-                  <BtnCard>
+                  <BtnCard onClick={meusPacotesOnClick}>
                     Meus Pacotes
                   </BtnCard>
                   <BtnCard onClick={meuCadastroOnClick}>
                     Meu Cadastro
                   </BtnCard>
-                  <BtnCard>
+                  <BtnCard onClick={meusPagamentosOnClick}>
                     Meus Pagamentos
                   </BtnCard>
                   <BtnCard onClick={cadastrarOnClick}>
@@ -90,7 +100,7 @@ class Perfil extends Component {
                   <BtnCard>
                     Minhas Reservas
                   </BtnCard>
-                  <BtnCard>
+                  <BtnCard onClick={meusPagamentosOnClick}>
                     Meus Pagamentos
                   </BtnCard>
                   <BtnCard onClick={meuCadastroOnClick}>
