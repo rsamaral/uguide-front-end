@@ -25,6 +25,7 @@ class AddTour extends Component {
       time: "",
       price: "",
       guide: "",
+      tourist: null,
       submitted: false,
     };
   }
@@ -66,14 +67,14 @@ class AddTour extends Component {
   }
 
   saveTour() {
-    const { title, description, price, data, time, city} = this.state;
+    const { title, description, price, data, time, city, tourist} = this.state;
 
     const { user: currentUser} = this.props;
 
     const guide = currentUser.id;
 
     this.props
-      .createTour(title, description, price, guide, data, time, city)
+      .createTour(title, description, price, guide, data, time, city, tourist)
       .then((data) => {
         this.setState({
           id: data.id,
@@ -84,6 +85,7 @@ class AddTour extends Component {
           data: data.data,
           city: data.city,
           time: data.time,
+          tourist: data.tourist,
           submitted: true,
         });
         console.log(data)
@@ -101,6 +103,7 @@ class AddTour extends Component {
       price: "",
       data: "",
       guide: "",
+      tourist: "",
       submitted: false,
     });
   }  

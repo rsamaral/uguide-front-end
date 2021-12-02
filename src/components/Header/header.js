@@ -19,6 +19,8 @@ import { history } from '../../helpers/history';
 import MeuCadastro from "../../pages/MeuCadastro/meucadastro";
 import MeusPacotes from "../../pages/MeusPacotes/meusPacotes"
 import MeusPagamentos from "../../pages/MeusPagamentos/MeusPagamentos"
+import MinhasReservas from "../../pages/MinhasReservas/Reservas"
+import Confirmacao from "../../pages/Confirmacao/confirmacao"
 
 class Header extends Component {
   constructor(props) {
@@ -59,24 +61,24 @@ class Header extends Component {
         <Fragment>
         <Nav>
           <NavMenu>
-            <NavLink to={"/Inicio"}>
+            <NavLink to={"/inicio"}>
                 Início
             </NavLink>
-            <NavLink to={"/Sobre"}>
+            <NavLink to={"/sobre"}>
                 Sobre
             </NavLink>
-            <NavLink to={"/Contato"}>
+            <NavLink to={"/contato"}>
               Contato
             </NavLink>
             {!currentUser ?
             <Fragment>
               <NavBtn>
-                <NavBtnLinkB to={"/CadastroPage"}>
+                <NavBtnLinkB to={"/cadastroPage"}>
                   Cadastro
                 </NavBtnLinkB>
               </NavBtn>  
               <NavBtn>
-                <NavBtnLinkW to={"/LoginPage"}>
+                <NavBtnLinkW to={"/loginPage"}>
                   Login
                 </NavBtnLinkW>
               </NavBtn>
@@ -84,7 +86,7 @@ class Header extends Component {
             :
             <Fragment>
               <NavBtnAvatar>
-                <NavBtnLinkAvatar to={"/PerfilPage"}>
+                <NavBtnLinkAvatar to={"/perfilPage"}>
                   <AvatarUser
                     name={currentUser.fullname}
                     maxInitials="2"
@@ -94,7 +96,7 @@ class Header extends Component {
                 </NavBtnLinkAvatar>
               </NavBtnAvatar>  
               <NavBtn>
-                <NavBtnLinkW to={"/LoginPage"} onClick={this.logOut}>
+                <NavBtnLinkW to={"/loginPage"} onClick={this.logOut}>
                   Sair
                 </NavBtnLinkW>
               </NavBtn>
@@ -104,36 +106,42 @@ class Header extends Component {
         </Nav>
           <div>
             <Switch>
-              <Route exact path={["/Inicio", "/"]}>
+              <Route exact path={["/inicio", "/"]}>
                 <Inicio />
               </Route>
-              <Route exact path={["/List"]}>
+              <Route exact path={["/list"]}>
                 <List />
               </Route>
-              <Route exact path={["/Sobre"]}>
+              <Route exact path={["/sobre"]}>
                 <Sobre />
               </Route>
-              <Route exact path={["/Contato"]}>
+              <Route exact path={["/contato"]}>
                 <Contato />
               </Route>
-              <Route exact path={["/CadastroPage"]}>
+              <Route exact path={["/cadastroPage"]}>
                 <Cadastro />
               </Route>
-              <Route exact path={["/LoginPage"]}>
+              <Route exact path={["/loginPage"]}>
                 <Login />
               </Route>
-              <Route exact path={["/PerfilPage"]}>
+              <Route exact path={["/perfilPage"]}>
                 <PerfilPage />
               </Route>
               <Route exact path="/add" component={AddTour} />
-              <Route exact path={["/MeuCadastro"]}>
+              <Route exact path={["/meucadastro"]}>
                 <MeuCadastro />
               </Route>
-              <Route exact path={["/MeusPacotes"]}>
+              <Route exact path={["/meuspacotes"]}>
                 <MeusPacotes />
               </Route>
-              <Route exact path={["/MeusPagamentos"]}>
+              <Route exact path={["/meuspagamentos"]}>
                 <MeusPagamentos />
+              </Route>
+              <Route exact path={["/minhasreservas"]}>
+                <MinhasReservas />
+              </Route>
+              <Route exact path={["/confirmacao"]}>
+                <Confirmacao />
               </Route>
               <Route path="/tour/:id" component={Tour} />
             </Switch>

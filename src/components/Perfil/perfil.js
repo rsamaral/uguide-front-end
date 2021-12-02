@@ -15,27 +15,32 @@ class Perfil extends Component {
     }
 
     function meuCadastroOnClick() {
-      history.push("/MeuCadastro")
+      history.push("/meucadastro")
       window.location.reload();
     }
 
     function meusPacotesOnClick () {
-      history.push("/MeusPacotes")
+      history.push("/meuspacotes")
       window.location.reload()
     }
 
     function buscarOnClick() {
-      history.push("/List")
+      history.push("/list")
       window.location.reload();
     }
 
     function meusPagamentosOnClick() {
-      history.push("/MeusPagamentos")
+      history.push("/meuspagamentos")
+      window.location.reload();
+    }
+
+    function minhasReservasOnClick() {
+      history.push("/minhasreservas")
       window.location.reload();
     }
 
     if (!currentUser) {
-      return <Redirect to="/LoginPage" />;
+      return <Redirect to="/loginpage" />;
     }
 
     return (
@@ -97,7 +102,7 @@ class Perfil extends Component {
                   {currentUser.fullname}
                 </NomeCard>
                 <BtnContainer>
-                  <BtnCard>
+                  <BtnCard onClick={minhasReservasOnClick}>
                     Minhas Reservas
                   </BtnCard>
                   <BtnCard onClick={meusPagamentosOnClick}>

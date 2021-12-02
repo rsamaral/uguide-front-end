@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { findTourById, retrieveTour, updateTour, deleteTour } from "../actions/uguide-actions/tour";
+import { findTourById, retrieveTour, updateTour } from "../actions/uguide-actions/tour";
 import TourDataService from "../services/tour.service";
 
 
@@ -12,11 +12,10 @@ class Tour extends Component {
     this.onChangePrice = this.onChangePrice.bind(this);
     this.findTourById = this.findTourById.bind(this);
     this.updateContent = this.updateContent.bind(this);
-    this.removeTour = this.removeTour.bind(this);
 
     this.state = {
       currentTour: {
-        id: "null",
+        id: "",
         title: "",
         description: "",
         data: "",
@@ -24,6 +23,7 @@ class Tour extends Component {
         city: "",
         time: "",
         guide: "",
+        tourist: "",
       },
       message: "",
     };
@@ -94,18 +94,8 @@ class Tour extends Component {
       });
   }
 
-  removeTour() {
-    this.props
-      .deleteTour(this.state.currentTour.id)
-      .then(() => {
-        this.props.history.push("/tours");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
   render() {
+
     const { currentTour } = this.state;
 
     return (
@@ -181,4 +171,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { retrieveTour, updateTour, deleteTour })(Tour);
+export default connect(mapStateToProps, { retrieveTour, updateTour, findTourById })(Tour);

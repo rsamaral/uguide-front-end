@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { retrieveTour, findTourByTitle, deleteAllTour } from "../../actions/uguide-actions/tour";
+import { retrieveTour, findTourByTitle, deleteAllTour, updateTour } from "../../actions/uguide-actions/tour";
+import { history } from '../../helpers/history';
 import {
   SearchUL, 
   MainContainer, 
@@ -12,7 +13,8 @@ import {
   Passeios, 
   SearchList,
   ShowTours,
-  PasseiosInfo
+  PasseiosInfo,
+  ReservaBtn,
 } from "./styles"
 
 export const TourList = (props) => {
@@ -55,6 +57,23 @@ export const TourList = (props) => {
 
   const {tours} = props
 
+  const { user: currentUser} = props;
+
+  const onReservarClick = () => {
+    currentTour.tourist = currentUser.user.id;
+
+      props
+        .updateTour(currentTour.id, currentTour)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+        history.push("/confirmacao")
+        window.location.reload()
+    }
 
     return (
       <MainContainer>
@@ -98,12 +117,6 @@ export const TourList = (props) => {
             ))
           } 
         </Passeios>
-        {/* <SearchListBtn
-          className="m-3 btn btn-sm btn-danger"
-          onClick={this.removeAllTour}
-        >
-          Excluir Pacotes
-        </SearchListBtn> */}
         {currentTour && (
           <PasseiosInfo>
             <div>
@@ -142,6 +155,9 @@ export const TourList = (props) => {
               </label>{" "}
               {currentTour.city}
             </div>
+            <ReservaBtn onClick={onReservarClick}>
+              Reservar
+            </ReservaBtn>
           </PasseiosInfo>
         )}
         </ShowTours>
@@ -152,7 +168,8 @@ export const TourList = (props) => {
   const mapStateToProps = (state) => {
     return {
       tours: state.tours,
+      user: state.auth,
     };
   };
   
-  export default connect(mapStateToProps, { retrieveTour, findTourByTitle, deleteAllTour })(TourList);
+  export default connect(mapStateToProps, { retrieveTour, findTourByTitle, deleteAllTour, updateTour })(TourList);

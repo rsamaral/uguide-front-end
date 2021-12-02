@@ -87,6 +87,17 @@ export const SearchList = styled.li`
   font-weight: bold;
   margin: auto;
 `
+export const ReservaBtn = styled.button`
+  height: 50px;
+  width: 100%;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin: auto;
+`
 
 export const ShowTours = styled.div`
   display: flex;

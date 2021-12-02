@@ -26,7 +26,7 @@ class Search extends Component {
 
   findByTitle() {
     history.push({
-      pathname: '/List',
+      pathname: '/list',
       state: { searchTitle: this.state.searchTitle }
     })
     window.location.reload()

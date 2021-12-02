@@ -32,6 +32,10 @@ class TourDataService {
   findById(id){
     return http.get(`/tour/${id}`)
   }
+
+  findByTourist(tourist){
+    return http.get(`/tour/${tourist}`)
+  }
 }
 
 export default new TourDataService();
