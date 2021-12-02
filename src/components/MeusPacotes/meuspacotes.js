@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { retrieveTour, findByGuide } from "../../actions/uguide-actions/tour";
+import { retrieveTour, findByGuide, deleteTour } from "../../actions/uguide-actions/tour";
 import { Header, MainContainer, PacotesContainer, PacotesList, PacotesListItens, ItensTitle, NavBtn, NavBtnLinkB, ExcluirBtn, FooterPacotes } from "./styles";
 
 class MeusPacotes extends Component {
@@ -16,12 +16,22 @@ class MeusPacotes extends Component {
   findByGuide (guide) {
     this.props.findByGuide(guide)
   }
-
   
+
+  removeTour(id) {
+    this.props
+      .deleteTour(id)
+      .then(() => {
+        console.log("Pacote excluído!")
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+
   render() {
     const { tours } = this.props;
-
-    console.log(tours)
 
     return (
       <MainContainer>
@@ -75,7 +85,7 @@ class MeusPacotes extends Component {
                 <NavBtnLinkB to={"/tour/" + tour.id}>
                   Editar Passeio
                 </NavBtnLinkB>
-                <ExcluirBtn>
+                <ExcluirBtn onClick={() => {this.removeTour(tour.id)}}>
                   Excluir Pacote
                 </ExcluirBtn> 
               </NavBtn> 
@@ -96,4 +106,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { retrieveTour, findByGuide })(MeusPacotes);
+export default connect(mapStateToProps, { retrieveTour, findByGuide, deleteTour })(MeusPacotes);
