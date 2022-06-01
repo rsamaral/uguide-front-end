@@ -118,7 +118,7 @@ class Login extends Component {
                 )}
                 <span>Login</span>
               </BtnLogin>
-              <ForgetLink to={"#"}>Esqueci minha Senha</ForgetLink>
+              {/* <ForgetLink to={"#"}>Esqueci minha Senha</ForgetLink> */}
             </BtnContainer>
 
             <BtnLogin

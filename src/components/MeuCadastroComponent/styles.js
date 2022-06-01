@@ -20,15 +20,17 @@ export const CadastroContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 85%;
+  width: 40%;
   margin: auto;
+  border: 1px solid #E5E5E5;
+  border-radius: 10px;
 `
 
 export const CadastroItens = styled.div`
   display: flex;
   background-color: #E5E5E5;
   align-items: center;
-  width: 35%;
+  width: 80%;
   height: 80px;
   border: 1px solid transparent;
   border-radius: 10px;

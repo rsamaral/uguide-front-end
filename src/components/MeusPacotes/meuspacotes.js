@@ -82,9 +82,9 @@ class MeusPacotes extends Component {
               </PacotesListItens>
               <FooterPacotes>
               <NavBtn>
-                <NavBtnLinkB to={"/tour/" + tour.id}>
+                {/* <NavBtnLinkB to={"/tour/" + tour.id}>
                   Editar Passeio
-                </NavBtnLinkB>
+                </NavBtnLinkB> */}
                 <ExcluirBtn onClick={() => {this.removeTour(tour.id)}}>
                   Excluir Pacote
                 </ExcluirBtn> 

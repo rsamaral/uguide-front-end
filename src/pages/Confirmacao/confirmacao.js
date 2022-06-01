@@ -1,6 +1,5 @@
 import React from "react"
 import { MainContainer, Header } from "./styles";
-import { history } from '../../helpers/history';
 
 export const Confirmacao = () => {
   return(
