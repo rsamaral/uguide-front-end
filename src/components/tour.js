@@ -1,174 +1,157 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { findTourById, retrieveTour, updateTour } from "../actions/uguide-actions/tour";
-import TourDataService from "../services/tour.service";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTour, deleteTour } from '../actions/uguide-actions/tour';
+import TourDataService from '../services/tour.service';
 
+const Tour = (props) => {
+  const dispatch = useDispatch();
+  const { match } = props;
+  const id = match.params.id;
 
-class Tour extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangePrice = this.onChangePrice.bind(this);
-    this.findTourById = this.findTourById.bind(this);
-    this.updateContent = this.updateContent.bind(this);
+  const [currentTour, setCurrentTour] = useState({
+    id: '',
+    title: '',
+    description: '',
+    data: '',
+    price: '',
+    city: '',
+    time: '',
+    guide: '',
+    tourist: '',
+  });
 
-    this.state = {
-      currentTour: {
-        id: "",
-        title: "",
-        description: "",
-        data: "",
-        price: "",
-        city: "",
-        time: "",
-        guide: "",
-        tourist: "",
-      },
-      message: "",
-    };
-  }
+  const [message, setMessage] = useState('');
 
-  componentDidMount() {
-    this.findTourById(this.props.match.params.id);
-  }
-
-  onChangeTitle(e) {
-    const title = e.target.value;
-
-    this.setState(function (prevState) {
-      return {
-        currentTour: {
-          ...prevState.currentTour,
-          title: title,
-        },
-      };
-    });
-  }
-
-  onChangeDescription(e) {
-    const description = e.target.value;
-
-    this.setState((prevState) => ({
-      currentTour: {
-        ...prevState.currentTour,
-        description: description,
-      },
-    }));
-  }
-
-  onChangePrice(e) {
-    const price = e.target.value;
-
-    this.setState((prevState) => ({
-      currentTour: {
-        ...prevState.currentTour,
-        price: price,
-      },
-    }));
-  }
-
-  findTourById(id) {
-    TourDataService.findById(id)
-    .then((response) => {
-      this.setState({
-        currentTour: response.data,
-      });
-      console.log(response.data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-  }
-
-  updateContent() {
-    this.props
-      .updateTour(this.state.currentTour.id, this.state.currentTour)
+  const getTour = (tourId) => {
+    TourDataService.findById(tourId)
       .then((response) => {
-        console.log(response);
-        
-        this.setState({ message: "The tutorial was updated successfully!" });
+        setCurrentTour(response.data);
+        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
-  }
+  };
 
-  render() {
+  useEffect(() => {
+    if (id) {
+      getTour(id);
+    }
+  }, [id]);
 
-    const { currentTour } = this.state;
+  const onChangeTitle = (e) => {
+    const title = e.target.value;
+    setCurrentTour((prev) => ({
+      ...prev,
+      title,
+    }));
+  };
 
-    return (
-      <div>
+  const onChangeDescription = (e) => {
+    const description = e.target.value;
+    setCurrentTour((prev) => ({
+      ...prev,
+      description,
+    }));
+  };
+
+  const onChangePrice = (e) => {
+    const price = e.target.value;
+    setCurrentTour((prev) => ({
+      ...prev,
+      price,
+    }));
+  };
+
+  const handleUpdate = () => {
+    dispatch(updateTour(currentTour.id, currentTour))
+      .then((response) => {
+        console.log(response);
+        setMessage('The tour was updated successfully!');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const handleDeleteTour = () => {
+    if (!currentTour.id) return;
+
+    dispatch(deleteTour(currentTour.id))
+      .then((response) => {
+        console.log(response);
+        setMessage('The tour was deleted successfully!');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  return (
+    <div>
       {currentTour ? (
-        <div className="edit-form">
-          <h4>Passeio</h4>
+        <div className='edit-form'>
+          <h4>Tour</h4>
           <form>
-            <div className="form-group">
-              <label htmlFor="title">Título</label>
+            <div className='form-group'>
+              <label htmlFor='title'>Title</label>
               <input
-                type="text"
-                className="form-control"
-                id="title"
+                type='text'
+                className='form-control'
+                id='title'
                 value={currentTour.title}
-                onChange={this.onChangeTitle}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Descrição</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                value={currentTour.description}
-                onChange={this.onChangeDescription}
+                onChange={onChangeTitle}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="price">Preço</label>
+            <div className='form-group'>
+              <label htmlFor='description'>Description</label>
               <input
-                type="text"
-                className="form-control"
-                id="price"
+                type='text'
+                className='form-control'
+                id='description'
+                value={currentTour.description}
+                onChange={onChangeDescription}
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='price'>Price</label>
+              <input
+                type='text'
+                className='form-control'
+                id='price'
                 value={currentTour.price}
-                onChange={this.onChangePrice}
+                onChange={onChangePrice}
               />
             </div>
           </form>
 
           <button
-            className="badge badge-danger mr-2"
-            onClick={this.removeTour}
+            className='badge badge-danger mr-2'
+            onClick={handleDeleteTour}
           >
-            Excluir passeio
+            Delete tour
           </button>
 
           <button
-            type="submit"
-            className="badge badge-success"
-            onClick={this.updateContent}
+            type='button'
+            className='badge badge-success'
+            onClick={handleUpdate}
           >
-            Atualizar
+            Update
           </button>
-          <p>{this.state.message}</p>
+
+          <p>{message}</p>
         </div>
       ) : (
         <div>
           <br />
-          <p>Clique no Passeio desejado.</p>
+          <p>Click on the desired tour.</p>
         </div>
       )}
-    </div> 
-
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    tours: state.tours,
-  };
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, { retrieveTour, updateTour, findTourById })(Tour);
+export default Tour;

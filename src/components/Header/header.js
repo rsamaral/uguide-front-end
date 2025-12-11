@@ -1,162 +1,176 @@
-import React, { Fragment, Component } from "react"
-import { connect } from "react-redux";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import React, { Fragment, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Inicio from "../../pages/Inicio/inicio";
-import PerfilPage from "../../pages/Perfil/perfil";
-import List from "../../pages/List/list.js";
-import Sobre from "../../pages/Sobre/sobre";
-import Cadastro from "../../pages/Cadastro/cadastro";
-import Login from "../../pages/Login/login"
-import Contato from "../../pages/Contato/contato";
-import AddTour from "../../components/AdicionarPasseio/add-tour"
-import Tour from "../../components/tour"
-import {Nav, NavBtn, NavLink, NavBtnLinkB, NavBtnLinkW, NavMenu, AvatarUser, NavBtnLinkAvatar, NavBtnAvatar} from "./styles"
-import { logout } from "../../actions/auth-actions/auth";
-import { clearMessage } from "../../actions/auth-actions/message";
+import Home from '../../pages/Inicio/inicio.js';
+import ProfilePage from '../../pages/Perfil/perfil.js';
+import List from '../../pages/List/list.js';
+import About from '../../pages/Sobre/sobre.js';
+import RegisterPage from '../../pages/Cadastro/cadastro.js';
+import Login from '../../pages/Login/login.js';
+import Contact from '../../pages/Contato/contato.js';
+import AddTour from '../../components/AdicionarPasseio/add-tour';
+import Tour from '../tour.js';
 
-import { history } from '../../helpers/history';
-import MeuCadastro from "../../pages/MeuCadastro/meucadastro";
-import MeusPacotes from "../../pages/MeusPacotes/meusPacotes"
-import MeusPagamentos from "../../pages/MeusPagamentos/MeusPagamentos"
-import MinhasReservas from "../../pages/MinhasReservas/Reservas"
-import Confirmacao from "../../pages/Confirmacao/confirmacao"
+import {
+  Nav,
+  NavBtn,
+  NavLink,
+  NavBtnLinkB,
+  NavBtnLinkW,
+  NavMenu,
+  AvatarUser,
+  NavBtnLinkAvatar,
+  NavBtnAvatar,
+} from './styles.js';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.logOut = this.logOut.bind(this);
+import { logout } from '../../actions/auth-actions/auth.js';
+import { clearMessage } from '../../actions/auth-actions/message.js';
+import { history } from '../../helpers/history.js';
 
-    this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      currentUser: undefined,
-    };
+import MyProfile from '../../pages/MeuCadastro/meucadastro.js';
+import MyPackages from '../../pages/MeusPacotes/meusPacotes.js';
+import MyPayments from '../../pages/MeusPagamentos/MeusPagamentos.js';
+import MyBookings from '../../pages/MinhasReservas/Reservas.js';
+import Confirmation from '../../pages/Confirmacao/confirmacao.js';
 
-    history.listen((location) => {
-      props.dispatch(clearMessage()); // clear message when changing location
+const Header = () => {
+  const dispatch = useDispatch();
+
+  // Get user from Redux store
+  const user = useSelector((state) => state.auth.user);
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+
+  // Clear messages on route change
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      dispatch(clearMessage());
     });
-  }
 
-  componentDidMount() {
-    const user = this.props.user;
+    return () => {
+      if (unlisten) unlisten();
+    };
+  }, [dispatch]);
 
+  // Load logged user
+  useEffect(() => {
     if (user) {
-      this.setState({
-        currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-      });
+      setCurrentUser(user);
+      setShowModeratorBoard(user.roles?.includes('ROLE_MODERATOR'));
+      setShowAdminBoard(user.roles?.includes('ROLE_ADMIN'));
+    } else {
+      setCurrentUser(undefined);
+      setShowModeratorBoard(false);
+      setShowAdminBoard(false);
     }
-  }
+  }, [user]);
 
-  logOut() {
-    this.props.dispatch(logout());
-  }
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
-  render() {
-    const { currentUser} = this.state;
-    return (
-      <Router forceRefresh={true}>
-        <Fragment>
+  return (
+    <Router forceRefresh={true}>
+      <Fragment>
         <Nav>
           <NavMenu>
-            <NavLink to={"/inicio"}>
-                Início
-            </NavLink>
-            <NavLink to={"/sobre"}>
-                Sobre
-            </NavLink>
-            <NavLink to={"/contato"}>
-              Contato
-            </NavLink>
-            {!currentUser ?
-            <Fragment>
-              <NavBtn>
-                <NavBtnLinkB to={"/cadastroPage"}>
-                  Cadastro
-                </NavBtnLinkB>
-              </NavBtn>  
-              <NavBtn>
-                <NavBtnLinkW to={"/loginPage"}>
-                  Login
-                </NavBtnLinkW>
-              </NavBtn>
-            </Fragment>
-            :
-            <Fragment>
-              <NavBtnAvatar>
-                <NavBtnLinkAvatar to={"/perfilPage"}>
-                  <AvatarUser
-                    name={currentUser.fullname}
-                    maxInitials="2"
-                    color="fff"
-                    fgColor="000"
-                  />
-                </NavBtnLinkAvatar>
-              </NavBtnAvatar>  
-              <NavBtn>
-                <NavBtnLinkW to={"/loginPage"} onClick={this.logOut}>
-                  Sair
-                </NavBtnLinkW>
-              </NavBtn>
-            </Fragment>
-            }
-          </NavMenu>    
+            <NavLink to={'/home'}>Home</NavLink>
+            <NavLink to={'/about'}>About</NavLink>
+            <NavLink to={'/contact'}>Contact</NavLink>
+
+            {!currentUser ? (
+              <Fragment>
+                <NavBtn>
+                  <NavBtnLinkB to={'/registerPage'}>Register</NavBtnLinkB>
+                </NavBtn>
+                <NavBtn>
+                  <NavBtnLinkW to={'/loginPage'}>Login</NavBtnLinkW>
+                </NavBtn>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <NavBtnAvatar>
+                  <NavBtnLinkAvatar to={'/profilePage'}>
+                    <AvatarUser
+                      name={currentUser.fullname}
+                      maxInitials='2'
+                      color='fff'
+                      fgColor='000'
+                    />
+                  </NavBtnLinkAvatar>
+                </NavBtnAvatar>
+
+                <NavBtn>
+                  <NavBtnLinkW to={'/loginPage'} onClick={handleLogout}>
+                    Logout
+                  </NavBtnLinkW>
+                </NavBtn>
+              </Fragment>
+            )}
+          </NavMenu>
         </Nav>
-          <div>
-            <Switch>
-              <Route exact path={["/inicio", "/"]}>
-                <Inicio />
-              </Route>
-              <Route exact path={["/list"]}>
-                <List />
-              </Route>
-              <Route exact path={["/sobre"]}>
-                <Sobre />
-              </Route>
-              <Route exact path={["/contato"]}>
-                <Contato />
-              </Route>
-              <Route exact path={["/cadastroPage"]}>
-                <Cadastro />
-              </Route>
-              <Route exact path={["/loginPage"]}>
-                <Login />
-              </Route>
-              <Route exact path={["/perfilPage"]}>
-                <PerfilPage />
-              </Route>
-              <Route exact path="/add" component={AddTour} />
-              <Route exact path={["/meucadastro"]}>
-                <MeuCadastro />
-              </Route>
-              <Route exact path={["/meuspacotes"]}>
-                <MeusPacotes />
-              </Route>
-              <Route exact path={["/meuspagamentos"]}>
-                <MeusPagamentos />
-              </Route>
-              <Route exact path={["/minhasreservas"]}>
-                <MinhasReservas />
-              </Route>
-              <Route exact path={["/confirmacao"]}>
-                <Confirmacao />
-              </Route>
-              <Route path="/tour/:id" component={Tour} />
-            </Switch>
-          </div> 
-        </Fragment> 
-      </Router>
-    ) 
-  }
-}  
 
-function mapStateToProps(state) {
-  const { user } = state.auth;
-  return {
-    user,
-  };
-}
+        <div>
+          <Switch>
+            <Route exact path={['/home', '/']}>
+              <Home />
+            </Route>
 
-export default connect(mapStateToProps)(Header);
+            <Route exact path={['/list']}>
+              <List />
+            </Route>
+
+            <Route exact path={['/about']}>
+              <About />
+            </Route>
+
+            <Route exact path={['/contact']}>
+              <Contact />
+            </Route>
+
+            <Route exact path={['/registerPage']}>
+              <RegisterPage />
+            </Route>
+
+            <Route exact path={['/loginPage']}>
+              <Login />
+            </Route>
+
+            <Route exact path={['/profilePage']}>
+              <ProfilePage />
+            </Route>
+
+            <Route exact path='/add' component={AddTour} />
+
+            <Route exact path={['/myprofile']}>
+              <MyProfile />
+            </Route>
+
+            <Route exact path={['/mypackages']}>
+              <MyPackages />
+            </Route>
+
+            <Route exact path={['/mypayments']}>
+              <MyPayments />
+            </Route>
+
+            <Route exact path={['/mybookings']}>
+              <MyBookings />
+            </Route>
+
+            <Route exact path={['/confirmation']}>
+              <Confirmation />
+            </Route>
+
+            <Route path='/tour/:id' component={Tour} />
+          </Switch>
+        </div>
+      </Fragment>
+    </Router>
+  );
+};
+
+export default Header;

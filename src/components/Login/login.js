@@ -1,153 +1,121 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom"
-import { FormLogin, InputLogin, BtnLogin, MainContainer, ErrorMessage, Header, ForgetLink, BtnContainer} from "./styles";
-import { connect } from "react-redux";
-import { login } from "../../actions/auth-actions/auth";
+import React, { useState, useRef } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
+import {
+  FormLogin,
+  InputLogin,
+  BtnLogin,
+  MainContainer,
+  ErrorMessage,
+  Header,
+  BtnContainer,
+} from './styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../actions/auth-actions/auth';
 
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className='alert alert-danger' role='alert'>
         This field is required!
       </div>
     );
   }
 };
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+const Login = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    this.state = {
-      email: "",
-      password: "",
-      loading: false,
-    };
-  }
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const message = useSelector((state) => state.message.message);
 
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value,
-    });
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
+  const formRef = useRef();
+  const checkBtnRef = useRef();
 
-  handleLogin(e) {
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    this.setState({
-      loading: true,
-    });
+    setLoading(true);
 
-    this.form.validateAll();
+    formRef.current.validateAll();
 
-    const { dispatch, history } = this.props;
-
-    if (this.checkBtn.context._errors.length === 0) {
-      dispatch(login(this.state.email, this.state.password))
+    if (checkBtnRef.current.context._errors.length === 0) {
+      dispatch(login(email, password))
         .then(() => {
-          history.push("/PerfilPage");
+          history.push('/profilePage');
           window.location.reload();
         })
         .catch(() => {
-          this.setState({
-            loading: false
-          });
+          setLoading(false);
         });
     } else {
-      this.setState({
-        loading: false,
-      });
+      setLoading(false);
     }
-  }
-
-  render() {
-    const { isLoggedIn, message } = this.props;
-
-    if (isLoggedIn) {
-      return <Redirect to="/PerfilPage" />;
-    }
-
-    return (
-      <MainContainer>
-        <Header>
-          Login
-        </Header>
-          <FormLogin
-            onSubmit={this.handleLogin}
-            ref={(c) => {
-              this.form = c;
-            }}
-          >
-            <div>
-              <InputLogin
-                placeholder="  Email"
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.onChangeEmail}
-                validations={[required]}
-              />
-            </div>
-
-            <div>
-              <InputLogin
-                placeholder="  Senha"
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <BtnContainer>
-              <BtnLogin
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </BtnLogin>
-              {/* <ForgetLink to={"#"}>Esqueci minha Senha</ForgetLink> */}
-            </BtnContainer>
-
-            <BtnLogin
-              style={{ display: "none" }}
-              ref={(c) => {
-                this.checkBtn = c;
-              }}
-            />
-          </FormLogin>
-
-          {message && (
-              <div>
-                <ErrorMessage>
-                  {message}
-                </ErrorMessage>
-              </div>
-            )}
-        </MainContainer>
-    );
-  }
-}
-
-function mapStateToProps(state) {
-  const { isLoggedIn } = state.auth;
-  const { message } = state.message;
-  return {
-    isLoggedIn,
-    message
   };
-}
 
-export default connect(mapStateToProps)(Login);
+  if (isLoggedIn) {
+    return <Redirect to='/profilePage' />;
+  }
+
+  return (
+    <MainContainer>
+      <Header>Login</Header>
+
+      <FormLogin onSubmit={handleLogin} ref={formRef}>
+        <div>
+          <InputLogin
+            placeholder='Email'
+            type='text'
+            name='email'
+            value={email}
+            onChange={onChangeEmail}
+            validations={[required]}
+          />
+        </div>
+
+        <div>
+          <InputLogin
+            placeholder='Password'
+            type='password'
+            name='password'
+            value={password}
+            onChange={onChangePassword}
+            validations={[required]}
+          />
+        </div>
+
+        <BtnContainer>
+          <BtnLogin disabled={loading}>
+            {loading && (
+              <span className='spinner-border spinner-border-sm'></span>
+            )}
+            <span>Login</span>
+          </BtnLogin>
+        </BtnContainer>
+
+        {/* Hidden button used by the validation lib */}
+        <BtnLogin style={{ display: 'none' }} ref={checkBtnRef} />
+      </FormLogin>
+
+      {message && (
+        <div>
+          <ErrorMessage>{message}</ErrorMessage>
+        </div>
+      )}
+    </MainContainer>
+  );
+};
+
+export default Login;

@@ -1,4 +1,4 @@
-import styled from "styled-components"; 
+import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
@@ -6,14 +6,14 @@ export const MainContainer = styled.div`
   flex-direction: column;
   margin-top: 40px;
   font-family: Comfortaa;
-`
+`;
 
 export const Header = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 50px;
-`
+`;
 
 export const SearchListContainer = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const SearchListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-`
+`;
 
 export const SearchListInput = styled.input`
   display: flex;
@@ -31,7 +31,7 @@ export const SearchListInput = styled.input`
   margin-bottom: 20px;
   border-radius: 6px;
   border: 1px solid #ced4da;
-`
+`;
 
 export const SearchListBtn = styled.button`
   height: 40px;
@@ -43,24 +43,25 @@ export const SearchListBtn = styled.button`
   background: black;
   border: 1px solid black;
   border-radius: 6px;
-`
-export const SearchPasseiosTitle = styled.h5`
+`;
+
+export const SearchToursTitle = styled.h5`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
   margin-top: 50px;
-`
+`;
 
-export const Passeios = styled.div`
+export const Tours = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 20px auto auto auto;
-`
+`;
 
-export const PasseiosInfo = styled.div`
+export const TourInfo = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -68,12 +69,12 @@ export const PasseiosInfo = styled.div`
   border-left: 1px solid #ced4da;
   padding: 15px;
   width: 300px;
-`
+`;
 
-export const SearchUL = styled.ul `
+export const SearchUL = styled.ul`
   margin: 15px auto auto -10px;
-  padding: 0px important;
-`
+  padding: 0px !important;
+`;
 
 export const SearchList = styled.li`
   display: flex;
@@ -86,8 +87,9 @@ export const SearchList = styled.li`
   cursor: pointer;
   font-weight: bold;
   margin: auto;
-`
-export const ReservaBtn = styled.button`
+`;
+
+export const BookBtn = styled.button`
   height: 50px;
   width: 100%;
   color: white;
@@ -97,11 +99,11 @@ export const ReservaBtn = styled.button`
   border: 1px solid black;
   border-radius: 6px;
   margin: auto;
-`
+`;
 
 export const ShowTours = styled.div`
   display: flex;
   flex-direction: row;
   width: 700px;
   margin: auto;
-`
+`;

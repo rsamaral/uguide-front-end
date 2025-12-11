@@ -1,69 +1,46 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { retrieveTour, findTourByTitle } from "../../actions/uguide-actions/tour";
-import { SearchInput, SearchBtn, SearchContainer, HeaderSearch, MainContainer } from "./styles";
-import { history } from "../../helpers/history";
+import React, { useState } from 'react';
+import {
+  SearchInput,
+  SearchBtn,
+  SearchContainer,
+  HeaderSearch,
+  MainContainer,
+} from './styles';
+import { history } from '../../helpers/history';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.findByTitle = this.findByTitle.bind(this);
+const Search = () => {
+  const [searchTitle, setSearchTitle] = useState('');
 
-    this.state = {
-      searchTitle: "",
-    };
-  }
+  const handleSearchChange = (e) => {
+    setSearchTitle(e.target.value);
+  };
 
-
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
-
-    this.setState({
-      searchTitle: searchTitle,
-    });
-  }
-
-  findByTitle() {
+  const findByTitle = () => {
     history.push({
       pathname: '/list',
-      state: { searchTitle: this.state.searchTitle }
-    })
-    window.location.reload()
-  }
-
-
-  render() {
-    const { searchTitle } = this.state;
-
-    return (
-      <MainContainer>
-        <HeaderSearch>
-          Onde você está?
-        </HeaderSearch>
-        <SearchContainer>
-          <SearchInput
-            type="text"
-            placeholder="Digite aqui o seu local"
-            value={searchTitle}
-            onChange={this.onChangeSearchTitle}
-          />
-          <SearchBtn
-              type="button"
-              onClick={this.findByTitle}
-          >
-            Pesquisar
-          </SearchBtn>
-        </SearchContainer>  
-      </MainContainer>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    tours: state.tours,
+      state: { searchTitle },
+    });
+    window.location.reload();
   };
+
+  return (
+    <MainContainer>
+      <HeaderSearch>Where are you located?</HeaderSearch>
+
+      <SearchContainer>
+        <SearchInput
+          type='text'
+          placeholder='Type your location here'
+          value={searchTitle}
+          onChange={handleSearchChange}
+        />
+
+        <SearchBtn type='button' onClick={findByTitle}>
+          Search
+        </SearchBtn>
+      </SearchContainer>
+    </MainContainer>
+  );
 };
 
-export default connect(mapStateToProps, { retrieveTour, findTourByTitle })(Search);
+export default Search;
