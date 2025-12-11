@@ -5,45 +5,53 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
-} from "./types";
+} from './types';
 
-import AuthService from "../../services/auth.service";
+import AuthService from '../../services/auth.service';
 
-export const cadastro = (fullname, cellphone, country, email, password, roles) => (dispatch) => {
-  return AuthService.cadastro(fullname, cellphone, country, email, password, roles).then(
-    (response) => {
-      dispatch({
-        type: REGISTER_SUCCESS,
-      });
+export const register =
+  (fullname, cellphone, country, email, password, roles) => (dispatch) => {
+    return AuthService.register(
+      fullname,
+      cellphone,
+      country,
+      email,
+      password,
+      roles
+    ).then(
+      (response) => {
+        dispatch({
+          type: REGISTER_SUCCESS,
+        });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
+        dispatch({
+          type: SET_MESSAGE,
+          payload: response.data.message,
+        });
 
-      return Promise.resolve();
-    },
-    (error) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+        return Promise.resolve();
+      },
+      (error) => {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
-      dispatch({
-        type: REGISTER_FAIL,
-      });
+        dispatch({
+          type: REGISTER_FAIL,
+        });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+        dispatch({
+          type: SET_MESSAGE,
+          payload: message,
+        });
 
-      return Promise.reject();
-    }
-  );
-};
+        return Promise.reject();
+      }
+    );
+  };
 
 export const login = (email, password) => (dispatch) => {
   return AuthService.login(email, password).then(

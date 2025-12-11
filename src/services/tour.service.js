@@ -1,40 +1,49 @@
-import http from "../http-common";
+import http from '../http-common';
 
 class TourDataService {
-  getAll(){
-    return http.get("/tour");
+  // Get all tours (optionally with ?title= in query)
+  getAll() {
+    return http.get('/tour');
   }
 
-  get(guide){
-    return http.get(`/tour/${guide}`);
+  // Get tours by guide
+  findByGuide(guide) {
+    return http.get(`/tour/guide/${guide}`);
   }
 
-  create(data){
-    return http.post("/tour", data);
+  // Create a new tour
+  create(data) {
+    return http.post('/tour', data);
   }
 
-  update(id, data){
-    return http.put(`/tour/${id}`, data);
+  // Update a tour by id
+  update(id, data) {
+    return http.put(`/tour/id/${id}`, data);
   }
 
-  delete(id){
-    return http.delete(`/tour/${id}`);
+  // Delete a tour by id
+  delete(id) {
+    return http.delete(`/tour/id/${id}`);
   }
 
-  deleteAll(){
-    return http.delete("/tour");
+  // Delete all tours
+  deleteAll() {
+    return http.delete('/tour');
   }
 
-  findByTitle(title){
-    return http.get(`/tour?title=${title}`)
+  // Find tours by title (uses backend filter on ?title=)
+  findByTitle(title) {
+    return http.get(`/tour?title=${encodeURIComponent(title)}`);
   }
 
-  findById(id){
-    return http.get(`/tour/${id}`)
+  // Find a tour by id
+  findById(id) {
+    return http.get(`/tour/id/${id}`);
   }
 
-  findByTourist(tourist){
-    return http.get(`/tour/${tourist}`)
+  //   GET /api/tour/tourist/:tourist
+  findByTourist(tourist) {
+    return http.get(`/tour/tourist/${tourist}`);
   }
 }
 

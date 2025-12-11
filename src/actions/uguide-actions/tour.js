@@ -3,25 +3,36 @@ import {
   RETRIEVE_TOUR,
   UPDATE_TOUR,
   DELETE_TOUR,
-  DELETE_ALL_TOURS
-} from "./types"
+  DELETE_ALL_TOURS,
+} from './types';
 
-import TourDataService from "../../services/tour.service"
+import TourDataService from '../../services/tour.service';
 
-export const createTour = (title, description, price, guide, data, time, city, tourist) => async (dispatch) => {
-  try {
-    const res = await TourDataService.create({ title, description, price, guide, data, time, city, tourist});
+export const createTour =
+  (title, description, price, guide, data, time, city, tourist) =>
+  async (dispatch) => {
+    try {
+      const res = await TourDataService.create({
+        title,
+        description,
+        price,
+        guide,
+        data,
+        time,
+        city,
+        tourist,
+      });
 
-    dispatch({
-      type: CREATE_TOUR,
-      payload: res.data,
-    });
+      dispatch({
+        type: CREATE_TOUR,
+        payload: res.data,
+      });
 
-    return Promise.resolve(res.data);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
+      return Promise.resolve(res.data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
 
 export const retrieveTour = () => async (dispatch) => {
   try {
@@ -88,11 +99,11 @@ export const findTourByTitle = (title) => async (dispatch) => {
       payload: res.data,
     });
 
-    console.log(res.data)
+    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const findTourById = (id) => async (dispatch) => {
   try {
@@ -103,29 +114,26 @@ export const findTourById = (id) => async (dispatch) => {
       payload: res.data,
     });
 
-    console.log(res.data)
+    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
-}
-
-
+};
 
 export const findByGuide = (guide) => async (dispatch) => {
   try {
-    const res = await TourDataService.get(guide);
+    const res = await TourDataService.findByGuide(guide);
 
     dispatch({
       type: RETRIEVE_TOUR,
       payload: res.data,
     });
 
-    console.log(res.data)
+    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
-}
-
+};
 
 export const findByTourist = (tourist) => async (dispatch) => {
   try {
@@ -136,8 +144,8 @@ export const findByTourist = (tourist) => async (dispatch) => {
       payload: res.data,
     });
 
-    console.log(res.data)
+    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
-}
+};

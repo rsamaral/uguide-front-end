@@ -1,33 +1,40 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://192.168.25.24:8080/api/auth/";
+const API_URL = process.env.REACT_APP_API_URL;
 
 class AuthService {
   login(email, password) {
     return axios
-      .post(API_URL + "signin", { email, password })
+      .post(API_URL + 'signin', { email, password })
       .then((response) => {
         if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem('user', JSON.stringify(response.data));
         }
 
         return response.data;
+      })
+      .catch((error) => {
+        throw error;
       });
   }
 
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem('user');
   }
 
-  cadastro(fullname, cellphone, country, email, password, roles) {
-    return axios.post(API_URL + "signup", {
-      fullname,
-      cellphone,
-      country,
-      email,
-      password,
-      roles
-    });
+  register(fullname, cellphone, country, email, password, roles) {
+    return axios
+      .post(API_URL + 'signup', {
+        fullname,
+        cellphone,
+        country,
+        email,
+        password,
+        roles,
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 }
 
