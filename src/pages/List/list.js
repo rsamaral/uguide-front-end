@@ -1,19 +1,11 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import TourList from "../../components/SearchAndList/tour-list";
+import TourList from '../../components/TourList/TourList';
 
 export const List = () => {
-  const history = useHistory()
-
-  const onClickAdd = () => {
-    history.push("/add");
-  }
-
   return (
-    <div className="list">
-    <TourList />
+    <div className='list'>
+      <TourList />
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;

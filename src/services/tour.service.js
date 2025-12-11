@@ -1,14 +1,14 @@
 import http from '../http-common';
 
 class TourDataService {
-  // Get all tours (optionally with ?title= in query)
+  // Get all tours (optionally with ?title= in query on backend)
   getAll() {
     return http.get('/tour');
   }
 
-  // Get tours by guide
-  findByGuide(guide) {
-    return http.get(`/tour/guide/${guide}`);
+  // Get tours by guide id
+  findByGuide(guideId) {
+    return http.get(`/tour/guide/${guideId}`);
   }
 
   // Create a new tour
@@ -31,9 +31,11 @@ class TourDataService {
     return http.delete('/tour');
   }
 
-  // Find tours by title (uses backend filter on ?title=)
+  // Find tours by title
   findByTitle(title) {
-    return http.get(`/tour?title=${encodeURIComponent(title)}`);
+    return http.get(`/tour`, {
+      params: { title },
+    });
   }
 
   // Find a tour by id
@@ -41,9 +43,9 @@ class TourDataService {
     return http.get(`/tour/id/${id}`);
   }
 
-  //   GET /api/tour/tourist/:tourist
-  findByTourist(tourist) {
-    return http.get(`/tour/tourist/${tourist}`);
+  // Get tours reserved by a specific tourist
+  findByTourist(touristId) {
+    return http.get(`/tour/tourist/${touristId}`);
   }
 }
 

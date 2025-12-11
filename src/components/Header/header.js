@@ -2,15 +2,15 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from '../../pages/Inicio/inicio.js';
+import Home from '../../pages/Home/inicio.js';
 import ProfilePage from '../../pages/Perfil/perfil.js';
 import List from '../../pages/List/list.js';
 import About from '../../pages/Sobre/sobre.js';
-import RegisterPage from '../../pages/Cadastro/cadastro.js';
+import RegisterPage from '../../pages/Register/Register.js';
 import Login from '../../pages/Login/login.js';
-import Contact from '../../pages/Contato/contato.js';
+import Contact from '../../pages/Contact/Contact.js';
 import AddTour from '../../components/AdicionarPasseio/add-tour';
-import Tour from '../tour.js';
+import Tour from '../Tour.js';
 
 import {
   Nav,
@@ -32,7 +32,7 @@ import MyProfile from '../../pages/MeuCadastro/meucadastro.js';
 import MyPackages from '../../pages/MeusPacotes/meusPacotes.js';
 import MyPayments from '../../pages/MeusPagamentos/MeusPagamentos.js';
 import MyBookings from '../../pages/MinhasReservas/Reservas.js';
-import Confirmation from '../../pages/Confirmacao/confirmacao.js';
+import Confirmation from '../../pages/BookSuccess/BookSuccess.js';
 
 const Header = () => {
   const dispatch = useDispatch();

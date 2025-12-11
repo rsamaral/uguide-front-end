@@ -3,15 +3,15 @@ import {
   RETRIEVE_TOUR,
   UPDATE_TOUR,
   DELETE_TOUR,
-  DELETE_ALL_TOURS
-} from "../actions/uguide-actions/types"
+  DELETE_ALL_TOURS,
+} from '../actions/uguide-actions/types';
 
 const initialState = [];
 
-function tourReducer(tours = initialState, action){
+function tourReducer(tours = initialState, action) {
   const { type, payload } = action;
 
-  switch (type){
+  switch (type) {
     case CREATE_TOUR:
       return [...tours, payload];
 
@@ -31,14 +31,14 @@ function tourReducer(tours = initialState, action){
       });
 
     case DELETE_TOUR:
-      return tours.filter(({ id }) => id !== payload.id);  
-    
+      return tours.filter(({ id }) => id !== payload.id);
+
     case DELETE_ALL_TOURS:
-      return [];  
+      return [];
 
     default:
-      return tours;  
+      return tours;
   }
-};
+}
 
 export default tourReducer;

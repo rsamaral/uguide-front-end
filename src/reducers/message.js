@@ -1,16 +1,24 @@
-import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/auth-actions/types";
+import { SET_MESSAGE, CLEAR_MESSAGE } from '../actions/auth-actions/types';
 
-const initialState = {};
+const initialState = {
+  message: '',
+};
 
-export default function (state = initialState, action) {
+export default function messageReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case SET_MESSAGE:
-      return { message: payload };
+      return {
+        ...state,
+        message: payload,
+      };
 
     case CLEAR_MESSAGE:
-      return { message: "" };
+      return {
+        ...state,
+        message: '',
+      };
 
     default:
       return state;
