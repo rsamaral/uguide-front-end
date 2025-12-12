@@ -9,7 +9,7 @@ import {
   ErrorMessage,
 } from './styles';
 import { isEmail } from 'validator';
-import { cadastro as registerAction } from '../../actions/auth-actions/auth';
+import { register } from '../../actions/auth-actions/auth';
 
 // Validations
 const required = (value) => {
@@ -101,7 +101,7 @@ const Register = () => {
 
     if (checkBtnRef.current.context._errors.length === 0) {
       dispatch(
-        registerAction(
+        register(
           form.fullname,
           form.cellphone,
           form.country,

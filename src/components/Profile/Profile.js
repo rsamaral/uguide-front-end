@@ -8,7 +8,7 @@ import {
   ItemLabel,
 } from './styles';
 
-const MyProfile = () => {
+const Profile = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
   return (
@@ -32,4 +32,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default Profile;

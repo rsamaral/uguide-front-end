@@ -14,7 +14,7 @@ import {
   PackagesFooter,
 } from './styles';
 
-const MyPackages = () => {
+const Tours = () => {
   const dispatch = useDispatch();
 
   const tours = useSelector((state) => state.tours);
@@ -92,4 +92,4 @@ const MyPackages = () => {
   );
 };
 
-export default MyPackages;
+export default Tours;

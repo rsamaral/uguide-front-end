@@ -1,6 +1,6 @@
 import Register from '../../components/Register/Register';
 
-export const Register = () => {
+export const RegisterP = () => {
   return (
     <div>
       <Register />
@@ -8,4 +8,4 @@ export const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterP;

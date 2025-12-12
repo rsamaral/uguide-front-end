@@ -1,6 +1,6 @@
 import Login from '../../components/Login/Login';
 
-export const Login = () => {
+export const LoginP = () => {
   return (
     <div>
       <Login />
@@ -8,4 +8,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default LoginP;

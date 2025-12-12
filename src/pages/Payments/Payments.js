@@ -1,6 +1,6 @@
 import Payments from '../../components/Payments/Payments';
 
-export const Payments = () => {
+export const PaymentsP = () => {
   return (
     <div>
       <Payments />
@@ -8,4 +8,4 @@ export const Payments = () => {
   );
 };
 
-export default Payments;
+export default PaymentsP;

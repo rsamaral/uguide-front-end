@@ -11,7 +11,7 @@ import {
 } from './styles';
 import { history } from '../../helpers/history';
 
-const MyAccount = () => {
+const Account = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
   const registerTourOnClick = () => {
@@ -116,4 +116,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default Account;

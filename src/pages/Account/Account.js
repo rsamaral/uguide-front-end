@@ -1,6 +1,6 @@
 import MyProfile from '../../components/MyProfile/MyProfile.js';
 
-export const MyAccount = () => {
+export const AccountP = () => {
   return (
     <div>
       <MyProfile />
@@ -8,4 +8,4 @@ export const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default AccountP;

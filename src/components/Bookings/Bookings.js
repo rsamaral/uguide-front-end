@@ -13,7 +13,7 @@ import {
   PackageFooter,
 } from './styles';
 
-const MyBookings = () => {
+const Bookings = () => {
   const dispatch = useDispatch();
 
   const tours = useSelector((state) => state.tours);
@@ -101,4 +101,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default Bookings;

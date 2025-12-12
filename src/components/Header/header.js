@@ -2,14 +2,14 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from '../../pages/Home/inicio.js';
-import ProfilePage from '../../pages/Perfil/perfil.js';
-import List from '../../pages/List/list.js';
-import About from '../../pages/Sobre/sobre.js';
+import Home from '../../pages/Home/Home.js';
+import ProfilePage from '../../pages/Profile/Profile.js';
+import List from '../../pages/List/List.js';
+import About from '../../pages/About/About.js';
 import RegisterPage from '../../pages/Register/Register.js';
-import Login from '../../pages/Login/login.js';
+import Login from '../../pages/Login/Login.js';
 import Contact from '../../pages/Contact/Contact.js';
-import AddTour from '../../components/AdicionarPasseio/add-tour';
+import AddTour from '../../components/AddTour/AddTour.js';
 import Tour from '../Tour.js';
 
 import {
@@ -28,10 +28,10 @@ import { logout } from '../../actions/auth-actions/auth.js';
 import { clearMessage } from '../../actions/auth-actions/message.js';
 import { history } from '../../helpers/history.js';
 
-import MyProfile from '../../pages/MeuCadastro/meucadastro.js';
-import MyPackages from '../../pages/MeusPacotes/meusPacotes.js';
-import MyPayments from '../../pages/MeusPagamentos/MeusPagamentos.js';
-import MyBookings from '../../pages/MinhasReservas/Reservas.js';
+import MyProfile from '../../pages/Profile/Profile.js';
+import MyPackages from '../../pages/MyTours/MyTours.js';
+import MyPayments from '../../pages/Payments/Payments.js';
+import MyBookings from '../../pages/MyBookings/MyBookings.js';
 import Confirmation from '../../pages/BookSuccess/BookSuccess.js';
 
 const Header = () => {
