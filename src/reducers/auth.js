@@ -9,8 +9,9 @@ import {
 const storedUser = localStorage.getItem('user');
 const user = storedUser ? JSON.parse(storedUser) : null;
 
+// ✅ Only logged in if we have a user *and* an accessToken
 const initialState = {
-  isLoggedIn: !!user,
+  isLoggedIn: user && user.accessToken ? true : false,
   user,
 };
 

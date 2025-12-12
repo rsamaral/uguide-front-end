@@ -1,9 +1,9 @@
-import MyAccount from '../../components/MyAccount/MyAccount';
+import Account from '../../components/Account/Account';
 
 export const Profile = () => {
   return (
     <div>
-      <MyAccount />
+      <Account />
     </div>
   );
 };

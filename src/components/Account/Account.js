@@ -48,13 +48,15 @@ const Account = () => {
     return <Redirect to='/loginPage' />;
   }
 
+  console.log('currentUser.roles', currentUser.roles);
+
   return (
     <MainContainer>
       <Header>My Account</Header>
 
       {currentUser.roles &&
         currentUser.roles.map((role, index) => {
-          if (role === 'ROLE_GUIA') {
+          if (role === 'ROLE_GUIDE') {
             return (
               <div key={index}>
                 <NameCard>
@@ -74,7 +76,7 @@ const Account = () => {
                 </BtnContainer>
               </div>
             );
-          } else if (role === 'ROLE_TURISTA') {
+          } else if (role === 'ROLE_TOURIST') {
             return (
               <div key={index}>
                 <NameCard>

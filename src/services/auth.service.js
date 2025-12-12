@@ -1,6 +1,7 @@
+// src/services/auth.service.js
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = 'http://localhost:8080/api/auth'; // no trailing slash
 
 class AuthService {
   async login(email, password) {
@@ -8,11 +9,12 @@ class AuthService {
 
     const user = response.data;
 
+    // Save user in localStorage so auth state persists across refreshes
     if (user?.accessToken) {
       localStorage.setItem('user', JSON.stringify(user));
     }
 
-    return user;
+    return user; // 👈 the action will get the *user*, not axios response
   }
 
   logout() {
@@ -20,14 +22,20 @@ class AuthService {
   }
 
   async register(fullname, cellphone, country, email, password, roles) {
-    return axios.post(`${API_URL}/signup`, {
+    const normalizedRoles = (Array.isArray(roles) ? roles : [roles]).map((r) =>
+      r.toLowerCase()
+    );
+
+    const response = await axios.post(`${API_URL}/signup`, {
       fullname,
       cellphone,
       country,
       email,
       password,
-      roles,
+      roles: normalizedRoles,
     });
+
+    return response.data;
   }
 }
 

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   FormLogin,
   InputLogin,
@@ -12,19 +12,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../actions/auth-actions/auth';
 
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className='alert alert-danger' role='alert'>
-        This field is required!
-      </div>
-    );
-  }
-};
-
 const Login = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const message = useSelector((state) => state.message.message);
@@ -33,38 +22,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const formRef = useRef();
-  const checkBtnRef = useRef();
-
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleLogin = (e) => {
     e.preventDefault();
-
     setLoading(true);
 
-    formRef.current.validateAll();
-
-    if (checkBtnRef.current.context._errors.length === 0) {
-      dispatch(login(email, password))
-        .then(() => {
-          history.push('/profilePage');
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
+    if (!email || !password) {
       setLoading(false);
+      return;
     }
+
+    // We don't depend on the returned promise for redirect,
+    // only on Redux state (isLoggedIn)
+    dispatch(login(email, password)).finally(() => {
+      setLoading(false);
+    });
   };
 
+  // 👇 This is the redirect trigger:
   if (isLoggedIn) {
     return <Redirect to='/profilePage' />;
   }
@@ -73,15 +47,14 @@ const Login = () => {
     <MainContainer>
       <Header>Login</Header>
 
-      <FormLogin onSubmit={handleLogin} ref={formRef}>
+      <FormLogin onSubmit={handleLogin}>
         <div>
           <InputLogin
             placeholder='Email'
             type='text'
             name='email'
             value={email}
-            onChange={onChangeEmail}
-            validations={[required]}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -91,22 +64,16 @@ const Login = () => {
             type='password'
             name='password'
             value={password}
-            onChange={onChangePassword}
-            validations={[required]}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         <BtnContainer>
           <BtnLogin disabled={loading}>
-            {loading && (
-              <span className='spinner-border spinner-border-sm'></span>
-            )}
+            {loading && <span className='spinner-border spinner-border-sm' />}
             <span>Login</span>
           </BtnLogin>
         </BtnContainer>
-
-        {/* Hidden button used by the validation lib */}
-        <BtnLogin style={{ display: 'none' }} ref={checkBtnRef} />
       </FormLogin>
 
       {message && (

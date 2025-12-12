@@ -28,11 +28,11 @@ import { logout } from '../../actions/auth-actions/auth.js';
 import { clearMessage } from '../../actions/auth-actions/message.js';
 import { history } from '../../helpers/history.js';
 
-import MyProfile from '../../pages/Profile/Profile.js';
-import MyPackages from '../../pages/MyTours/MyTours.js';
-import MyPayments from '../../pages/Payments/Payments.js';
-import MyBookings from '../../pages/MyBookings/MyBookings.js';
-import Confirmation from '../../pages/BookSuccess/BookSuccess.js';
+import Profile from '../../pages/Profile/Profile.js';
+import Tours from '../../pages/Tours/Tours.js';
+import Payments from '../../pages/Payments/Payments.js';
+import Bookings from '../../pages/Bookings/Bookings.js';
+import BookSuccess from '../../pages/BookSuccess/BookSuccess.js';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -146,23 +146,23 @@ const Header = () => {
             <Route exact path='/add' component={AddTour} />
 
             <Route exact path={['/myprofile']}>
-              <MyProfile />
+              <Profile />
             </Route>
 
             <Route exact path={['/mypackages']}>
-              <MyPackages />
+              <Tours />
             </Route>
 
             <Route exact path={['/mypayments']}>
-              <MyPayments />
+              <Payments />
             </Route>
 
             <Route exact path={['/mybookings']}>
-              <MyBookings />
+              <Bookings />
             </Route>
 
             <Route exact path={['/confirmation']}>
-              <Confirmation />
+              <BookSuccess />
             </Route>
 
             <Route path='/tour/:id' component={Tour} />

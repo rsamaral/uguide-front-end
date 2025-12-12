@@ -59,11 +59,6 @@ export const Contact = () => {
     } catch (e) {
       console.log(e);
     }
-
-    console.log('Name: ', name);
-    console.log('Email: ', email);
-    console.log('Subject: ', subject);
-    console.log('Message: ', message);
   };
 
   return (
