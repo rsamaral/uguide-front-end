@@ -1,11 +1,11 @@
-import Account from '../../components/Account/Account';
+import Profile from '../../components/Profile/Profile';
 
-export const Profile = () => {
+export const ProfileP = () => {
   return (
     <div>
-      <Account />
+      <Profile />
     </div>
   );
 };
 
-export default Profile;
+export default ProfileP;

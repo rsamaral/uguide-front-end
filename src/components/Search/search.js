@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   SearchInput,
   SearchBtn,
@@ -6,9 +7,9 @@ import {
   HeaderSearch,
   MainContainer,
 } from './styles';
-import { history } from '../../helpers/history';
 
 const Search = () => {
+  const history = useHistory();
   const [searchTitle, setSearchTitle] = useState('');
 
   const handleSearchChange = (e) => {

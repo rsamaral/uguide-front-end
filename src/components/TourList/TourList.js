@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { findTourByTitle, updateTour } from '../../actions/uguide-actions/tour';
-import { history } from '../../helpers/history';
+import { useHistory } from 'react-router-dom';
 import {
   SearchUL,
   MainContainer,
@@ -19,6 +19,7 @@ import {
 
 const TourList = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const tours = useSelector((state) => state.tours);
   const currentUser = useSelector((state) => state.auth.user);

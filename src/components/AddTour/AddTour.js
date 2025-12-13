@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTour } from '../../actions/uguide-actions/tour';
+import { useHistory } from 'react-router-dom';
 import {
   MainContainer,
   Header,
@@ -12,6 +13,8 @@ import {
 
 const AddTour = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const currentUser = useSelector((state) => state.auth.user);
 
   const [tour, setTour] = useState({
@@ -102,6 +105,14 @@ const AddTour = () => {
         {submitted ? (
           <div>
             <h4>Your tour package has been successfully added!</h4>
+            <FormAddBtn
+              onClick={() => {
+                history.push('/mypackages');
+                window.location.reload();
+              }}
+            >
+              Go to My Tours
+            </FormAddBtn>
           </div>
         ) : (
           <div>

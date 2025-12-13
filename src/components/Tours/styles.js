@@ -87,7 +87,7 @@ export const NavBtn = styled.nav`
   font-size: 18px;
 `;
 
-export const DeleteBtn = styled.button`
+export const CustomBtn = styled.button`
   height: 30px;
   width: 200px;
   display: flex;

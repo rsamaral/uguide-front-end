@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { findByGuide, deleteTour } from '../../actions/uguide-actions/tour';
+import { useHistory } from 'react-router-dom';
 
 import {
   Header,
@@ -10,12 +11,13 @@ import {
   PackageListItem,
   ItemTitle,
   NavBtn,
-  DeleteBtn,
+  CustomBtn,
   PackagesFooter,
 } from './styles';
 
 const Tours = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const tours = useSelector((state) => state.tours);
   const currentUser = useSelector((state) => state.auth.user);
@@ -77,12 +79,16 @@ const Tours = () => {
 
             <PackagesFooter>
               <NavBtn>
-                {/* If you later want to enable editing:
-                <NavBtnLink to={`/tour/${tour.id}`}>Edit Tour</NavBtnLink>
-                */}
-                <DeleteBtn onClick={() => removeTour(tour.id)}>
-                  Delete Package
-                </DeleteBtn>
+                <CustomBtn
+                  onClick={() => {
+                    history.push('/tour');
+                  }}
+                >
+                  Edit
+                </CustomBtn>
+                <CustomBtn onClick={() => removeTour(tour.id)}>
+                  Delete
+                </CustomBtn>
               </NavBtn>
             </PackagesFooter>
           </PackageList>

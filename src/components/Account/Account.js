@@ -1,6 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import {
   Header,
   NomeCard as NameCard,
@@ -9,9 +10,10 @@ import {
   BtnCard,
   BtnContainer,
 } from './styles';
-import { history } from '../../helpers/history';
 
 const Account = () => {
+  const history = useHistory();
+
   const currentUser = useSelector((state) => state.auth.user);
 
   const registerTourOnClick = () => {
@@ -70,9 +72,7 @@ const Account = () => {
                     My Profile Details
                   </BtnCard>
                   <BtnCard onClick={myPaymentsOnClick}>My Payments</BtnCard>
-                  <BtnCard onClick={registerTourOnClick}>
-                    Register New Tour
-                  </BtnCard>
+                  <BtnCard onClick={registerTourOnClick}>Add new tour</BtnCard>
                 </BtnContainer>
               </div>
             );

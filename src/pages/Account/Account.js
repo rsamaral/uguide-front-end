@@ -1,9 +1,9 @@
-import MyProfile from '../../components/MyProfile/MyProfile.js';
+import Account from '../../components/Account/Account.js';
 
 export const AccountP = () => {
   return (
     <div>
-      <MyProfile />
+      <Account />
     </div>
   );
 };

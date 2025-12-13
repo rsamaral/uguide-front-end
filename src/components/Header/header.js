@@ -1,9 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 
 import Home from '../../pages/Home/Home.js';
-import ProfilePage from '../../pages/Profile/Profile.js';
+import AccountPage from '../../pages/Account/Account.js';
 import List from '../../pages/List/List.js';
 import About from '../../pages/About/About.js';
 import RegisterPage from '../../pages/Register/Register.js';
@@ -26,15 +31,14 @@ import {
 
 import { logout } from '../../actions/auth-actions/auth.js';
 import { clearMessage } from '../../actions/auth-actions/message.js';
-import { history } from '../../helpers/history.js';
 
-import Profile from '../../pages/Profile/Profile.js';
+import ProfilePage from '../../pages/Profile/Profile.js';
 import Tours from '../../pages/Tours/Tours.js';
 import Payments from '../../pages/Payments/Payments.js';
 import Bookings from '../../pages/Bookings/Bookings.js';
 import BookSuccess from '../../pages/BookSuccess/BookSuccess.js';
 
-const Header = () => {
+const HeaderRoutes = () => {
   const dispatch = useDispatch();
 
   // Get user from Redux store
@@ -44,16 +48,12 @@ const Header = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
 
-  // Clear messages on route change
-  useEffect(() => {
-    const unlisten = history.listen(() => {
-      dispatch(clearMessage());
-    });
+  // ✅ Now this works because we are INSIDE <Router>
+  const location = useLocation();
 
-    return () => {
-      if (unlisten) unlisten();
-    };
-  }, [dispatch]);
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [location.pathname, dispatch]);
 
   // Load logged user
   useEffect(() => {
@@ -73,102 +73,112 @@ const Header = () => {
   };
 
   return (
-    <Router forceRefresh={true}>
-      <Fragment>
-        <Nav>
-          <NavMenu>
-            <NavLink to={'/home'}>Home</NavLink>
-            <NavLink to={'/about'}>About</NavLink>
-            <NavLink to={'/contact'}>Contact</NavLink>
+    <Fragment>
+      <Nav>
+        <NavMenu>
+          <NavLink to={'/home'}>Home</NavLink>
+          <NavLink to={'/about'}>About</NavLink>
+          <NavLink to={'/contact'}>Contact</NavLink>
 
-            {!currentUser ? (
-              <Fragment>
-                <NavBtn>
-                  <NavBtnLinkB to={'/registerPage'}>Register</NavBtnLinkB>
-                </NavBtn>
-                <NavBtn>
-                  <NavBtnLinkW to={'/loginPage'}>Login</NavBtnLinkW>
-                </NavBtn>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <NavBtnAvatar>
-                  <NavBtnLinkAvatar to={'/profilePage'}>
-                    <AvatarUser
-                      name={currentUser.fullname}
-                      maxInitials='2'
-                      color='fff'
-                      fgColor='000'
-                    />
-                  </NavBtnLinkAvatar>
-                </NavBtnAvatar>
+          {!currentUser ? (
+            <Fragment>
+              <NavBtn>
+                <NavBtnLinkB to={'/registerPage'}>Register</NavBtnLinkB>
+              </NavBtn>
+              <NavBtn>
+                <NavBtnLinkW to={'/loginPage'}>Login</NavBtnLinkW>
+              </NavBtn>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <NavBtnAvatar>
+                <NavBtnLinkAvatar to={'/profilePage'}>
+                  <AvatarUser
+                    name={currentUser.fullname}
+                    maxInitials='2'
+                    color='fff'
+                    fgColor='000'
+                  />
+                </NavBtnLinkAvatar>
+              </NavBtnAvatar>
 
-                <NavBtn>
-                  <NavBtnLinkW to={'/loginPage'} onClick={handleLogout}>
-                    Logout
-                  </NavBtnLinkW>
-                </NavBtn>
-              </Fragment>
-            )}
-          </NavMenu>
-        </Nav>
+              <NavBtn>
+                <NavBtnLinkW to={'/loginPage'} onClick={handleLogout}>
+                  Logout
+                </NavBtnLinkW>
+              </NavBtn>
+            </Fragment>
+          )}
+        </NavMenu>
+      </Nav>
 
-        <div>
-          <Switch>
-            <Route exact path={['/home', '/']}>
-              <Home />
-            </Route>
+      <div>
+        <Switch>
+          <Route exact path={['/home', '/']}>
+            <Home />
+          </Route>
 
-            <Route exact path={['/list']}>
-              <List />
-            </Route>
+          <Route exact path='/list'>
+            <List />
+          </Route>
 
-            <Route exact path={['/about']}>
-              <About />
-            </Route>
+          <Route exact path='/about'>
+            <About />
+          </Route>
 
-            <Route exact path={['/contact']}>
-              <Contact />
-            </Route>
+          <Route exact path='/contact'>
+            <Contact />
+          </Route>
 
-            <Route exact path={['/registerPage']}>
-              <RegisterPage />
-            </Route>
+          <Route exact path='/registerPage'>
+            <RegisterPage />
+          </Route>
 
-            <Route exact path={['/loginPage']}>
-              <Login />
-            </Route>
+          <Route exact path='/loginPage'>
+            <Login />
+          </Route>
 
-            <Route exact path={['/profilePage']}>
-              <ProfilePage />
-            </Route>
+          <Route exact path='/profilePage'>
+            <AccountPage />
+          </Route>
 
-            <Route exact path='/add' component={AddTour} />
+          <Route exact path='/add' component={AddTour} />
 
-            <Route exact path={['/myprofile']}>
-              <Profile />
-            </Route>
+          {/* Your single Tour page */}
+          <Route exact path='/tour' component={Tour} />
 
-            <Route exact path={['/mypackages']}>
-              <Tours />
-            </Route>
+          <Route exact path='/myprofile'>
+            <ProfilePage />
+          </Route>
 
-            <Route exact path={['/mypayments']}>
-              <Payments />
-            </Route>
+          <Route exact path='/mypackages'>
+            <Tours />
+          </Route>
 
-            <Route exact path={['/mybookings']}>
-              <Bookings />
-            </Route>
+          <Route exact path='/mypayments'>
+            <Payments />
+          </Route>
 
-            <Route exact path={['/confirmation']}>
-              <BookSuccess />
-            </Route>
+          <Route exact path='/mybookings'>
+            <Bookings />
+          </Route>
 
-            <Route path='/tour/:id' component={Tour} />
-          </Switch>
-        </div>
-      </Fragment>
+          <Route exact path='/confirmation'>
+            <BookSuccess />
+          </Route>
+
+          {/* Tour details */}
+          <Route path='/tour/:id' component={Tour} />
+        </Switch>
+      </div>
+    </Fragment>
+  );
+};
+
+const Header = () => {
+  return (
+    <Router>
+      <HeaderRoutes />
     </Router>
   );
 };
