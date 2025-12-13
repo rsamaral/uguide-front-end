@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateTour, deleteTour } from '../actions/uguide-actions/tour';
 import TourDataService from '../services/tour.service';
+import { useLocation } from 'react-router-dom';
+import AddTour from './AddTour/AddTour';
 
-const Tour = (props) => {
+const Tour = () => {
   const dispatch = useDispatch();
-  const { match } = props;
-  const id = match.params.id;
+  const location = useLocation();
+  const tour = location.state?.tour;
+  console.log('tour', tour);
 
   const [currentTour, setCurrentTour] = useState({
     id: '',
@@ -34,10 +37,10 @@ const Tour = (props) => {
   };
 
   useEffect(() => {
-    if (id) {
-      getTour(id);
+    if (tour.id) {
+      getTour(tour.id);
     }
-  }, [id]);
+  }, [tour.id]);
 
   const onChangeTitle = (e) => {
     const title = e.target.value;
@@ -87,71 +90,73 @@ const Tour = (props) => {
       });
   };
 
-  return (
-    <div>
-      {currentTour ? (
-        <div className='edit-form'>
-          <h4>Tour</h4>
-          <form>
-            <div className='form-group'>
-              <label htmlFor='title'>Title</label>
-              <input
-                type='text'
-                className='form-control'
-                id='title'
-                value={currentTour.title}
-                onChange={onChangeTitle}
-              />
-            </div>
+  // return (
+  //   <div>
+  //     {currentTour ? (
+  //       <div className='edit-form'>
+  //         <h4>Tour</h4>
+  //         <form>
+  //           <div className='form-group'>
+  //             <label htmlFor='title'>Title</label>
+  //             <input
+  //               type='text'
+  //               className='form-control'
+  //               id='title'
+  //               value={currentTour.title}
+  //               onChange={onChangeTitle}
+  //             />
+  //           </div>
 
-            <div className='form-group'>
-              <label htmlFor='description'>Description</label>
-              <input
-                type='text'
-                className='form-control'
-                id='description'
-                value={currentTour.description}
-                onChange={onChangeDescription}
-              />
-            </div>
+  //           <div className='form-group'>
+  //             <label htmlFor='description'>Description</label>
+  //             <input
+  //               type='text'
+  //               className='form-control'
+  //               id='description'
+  //               value={currentTour.description}
+  //               onChange={onChangeDescription}
+  //             />
+  //           </div>
 
-            <div className='form-group'>
-              <label htmlFor='price'>Price</label>
-              <input
-                type='text'
-                className='form-control'
-                id='price'
-                value={currentTour.price}
-                onChange={onChangePrice}
-              />
-            </div>
-          </form>
+  //           <div className='form-group'>
+  //             <label htmlFor='price'>Price</label>
+  //             <input
+  //               type='text'
+  //               className='form-control'
+  //               id='price'
+  //               value={currentTour.price}
+  //               onChange={onChangePrice}
+  //             />
+  //           </div>
+  //         </form>
 
-          <button
-            className='badge badge-danger mr-2'
-            onClick={handleDeleteTour}
-          >
-            Delete tour
-          </button>
+  //         <button
+  //           className='badge badge-danger mr-2'
+  //           onClick={handleDeleteTour}
+  //         >
+  //           Delete tour
+  //         </button>
 
-          <button
-            type='button'
-            className='badge badge-success'
-            onClick={handleUpdate}
-          >
-            Update
-          </button>
+  //         <button
+  //           type='button'
+  //           className='badge badge-success'
+  //           onClick={handleUpdate}
+  //         >
+  //           Update
+  //         </button>
 
-          <p>{message}</p>
-        </div>
-      ) : (
-        <div>
-          <br />
-          <p>Click on the desired tour.</p>
-        </div>
-      )}
-    </div>
-  );
+  //         <p>{message}</p>
+  //       </div>
+  //     ) : (
+  //       <div>
+  //         <br />
+  //         <p>Click on the desired tour.</p>
+  //       </div>
+  //     )}
+  //   </div>
+  // );
+
+  return <AddTour editTour={tour} />;
 };
 
 export default Tour;

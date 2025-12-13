@@ -64,7 +64,6 @@ const TourList = () => {
       });
 
     history.push('/confirmation');
-    window.location.reload();
   };
 
   return (

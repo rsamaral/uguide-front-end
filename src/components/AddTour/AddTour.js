@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTour } from '../../actions/uguide-actions/tour';
 import { useHistory } from 'react-router-dom';
@@ -11,9 +11,10 @@ import {
   FormAddDesc,
 } from './styles';
 
-const AddTour = () => {
+const AddTour = ({ editTour }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const isEdit = !!editTour;
 
   const currentUser = useSelector((state) => state.auth.user);
 
@@ -28,6 +29,12 @@ const AddTour = () => {
     guide: '',
     tourist: null,
   });
+
+  useEffect(() => {
+    if (editTour) {
+      setTour(editTour);
+    }
+  }, [editTour]);
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -82,24 +89,9 @@ const AddTour = () => {
       });
   };
 
-  const newTour = () => {
-    setTour({
-      id: null,
-      title: '',
-      description: '',
-      date: '',
-      city: '',
-      time: '',
-      price: '',
-      guide: '',
-      tourist: null,
-    });
-    setSubmitted(false);
-  };
-
   return (
     <MainContainer>
-      <Header>Add a New Tour</Header>
+      <Header>{!isEdit ? 'Add a New Tour' : 'Edit your tour'}</Header>
 
       <FormAddContent>
         {submitted ? (
@@ -108,7 +100,6 @@ const AddTour = () => {
             <FormAddBtn
               onClick={() => {
                 history.push('/mypackages');
-                window.location.reload();
               }}
             >
               Go to My Tours
@@ -176,7 +167,9 @@ const AddTour = () => {
               name='time'
             />
 
-            <FormAddBtn onClick={saveTour}>Add Tour</FormAddBtn>
+            <FormAddBtn onClick={saveTour}>
+              {!isEdit ? 'Add Tour' : 'Edit Tour'}
+            </FormAddBtn>
           </div>
         )}
       </FormAddContent>

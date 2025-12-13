@@ -21,7 +21,6 @@ const Search = () => {
       pathname: '/list',
       state: { searchTitle },
     });
-    window.location.reload();
   };
 
   return (

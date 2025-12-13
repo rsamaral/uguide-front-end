@@ -69,7 +69,7 @@ const Tours = () => {
 
             <PackageListItem>
               <ItemTitle>Date:</ItemTitle>
-              {tour.data}
+              {tour.date}
             </PackageListItem>
 
             <PackageListItem>
@@ -81,7 +81,7 @@ const Tours = () => {
               <NavBtn>
                 <CustomBtn
                   onClick={() => {
-                    history.push('/tour');
+                    history.push('/tour', { tour });
                   }}
                 >
                   Edit

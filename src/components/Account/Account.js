@@ -18,32 +18,26 @@ const Account = () => {
 
   const registerTourOnClick = () => {
     history.push('/add');
-    window.location.reload();
   };
 
   const myProfileOnClick = () => {
     history.push('/myprofile');
-    window.location.reload();
   };
 
   const myPackagesOnClick = () => {
     history.push('/mypackages');
-    window.location.reload();
   };
 
   const searchToursOnClick = () => {
     history.push('/list');
-    window.location.reload();
   };
 
   const myPaymentsOnClick = () => {
     history.push('/mypayments');
-    window.location.reload();
   };
 
   const myBookingsOnClick = () => {
     history.push('/mybookings');
-    window.location.reload();
   };
 
   if (!currentUser) {

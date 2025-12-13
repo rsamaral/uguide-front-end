@@ -9,7 +9,7 @@ import {
 import TourDataService from '../../services/tour.service';
 
 export const createTour =
-  (title, description, price, guide, data, time, city, tourist) =>
+  (title, description, price, guide, date, time, city, tourist) =>
   async (dispatch) => {
     try {
       const res = await TourDataService.create({
@@ -17,7 +17,7 @@ export const createTour =
         description,
         price,
         guide,
-        data,
+        date,
         time,
         city,
         tourist,
