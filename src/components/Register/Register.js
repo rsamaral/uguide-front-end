@@ -107,7 +107,7 @@ const Register = () => {
           form.country,
           form.email,
           form.password,
-          form.roles
+          [form.roles.trim().toLowerCase()] // ✅ array
         )
       )
         .then(() => setSuccessful(true))
@@ -117,7 +117,7 @@ const Register = () => {
 
   return (
     <MainContainer>
-      <Header>Create Your Account</Header>
+      <Header>Create your acccount</Header>
 
       <RegisterForm onSubmit={handleRegister} ref={formRef}>
         {!successful && (
@@ -178,7 +178,7 @@ const Register = () => {
         {/* Hidden check button */}
         <RegisterButton style={{ display: 'none' }} ref={checkBtnRef} />
 
-        {message && (
+        {message?.trim() && (
           <div
             className={
               successful ? 'alert alert-success' : 'alert alert-danger'

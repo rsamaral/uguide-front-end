@@ -4,8 +4,8 @@ import { MainContainer, Header, Message } from './styles.js';
 const Payments = () => {
   return (
     <MainContainer>
-      <Header>My Payments</Header>
-      <Message>Coming Soon!</Message>
+      <Header>My payments</Header>
+      <Message>Coming soon!</Message>
     </MainContainer>
   );
 };

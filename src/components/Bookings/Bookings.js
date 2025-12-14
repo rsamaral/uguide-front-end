@@ -48,7 +48,7 @@ const Bookings = () => {
 
   return (
     <MainContainer>
-      <Header>My Bookings</Header>
+      <Header>My bookings</Header>
 
       <PackagesContainer>
         {bookedTours.length === 0 && (

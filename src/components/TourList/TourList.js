@@ -68,7 +68,7 @@ const TourList = () => {
 
   return (
     <MainContainer>
-      <Header>Find Your Tour</Header>
+      <Header>Find your tour</Header>
 
       <SearchListContainer>
         <SearchListInput

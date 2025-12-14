@@ -45,7 +45,7 @@ export const register =
 
         dispatch({
           type: SET_MESSAGE,
-          payload: response.data.message,
+          payload: response.message,
         });
 
         return Promise.resolve();

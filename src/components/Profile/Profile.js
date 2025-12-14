@@ -13,7 +13,7 @@ const Profile = () => {
 
   return (
     <MainContainer>
-      <Header>My Profile</Header>
+      <Header>My profile</Header>
 
       <AccountContainer>
         <ItemLabel>Name:</ItemLabel>

@@ -91,7 +91,7 @@ const AddTour = ({ editTour }) => {
 
   return (
     <MainContainer>
-      <Header>{!isEdit ? 'Add a New Tour' : 'Edit your tour'}</Header>
+      <Header>{!isEdit ? 'Add a new tour' : 'Edit your tour'}</Header>
 
       <FormAddContent>
         {submitted ? (

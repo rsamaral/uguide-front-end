@@ -48,7 +48,7 @@ const Account = () => {
 
   return (
     <MainContainer>
-      <Header>My Account</Header>
+      <Header>My account</Header>
 
       {currentUser.roles &&
         currentUser.roles.map((role, index) => {

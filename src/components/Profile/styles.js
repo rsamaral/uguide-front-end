@@ -45,3 +45,16 @@ export const ItemLabel = styled.h5`
   font-size: 22px;
   margin-top: 20px;
 `;
+
+export const CustomBtn = styled.button`
+  height: 60px;
+  width: 80%;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin-top: 20px;
+`;

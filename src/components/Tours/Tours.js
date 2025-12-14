@@ -38,7 +38,7 @@ const Tours = () => {
 
   return (
     <MainContainer>
-      <Header>My Packages</Header>
+      <Header>My packages</Header>
 
       <PackagesContainer>
         {tours.length === 0 && (
