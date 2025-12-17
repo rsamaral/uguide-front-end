@@ -6,7 +6,7 @@ export const About = () => {
     <MainContainer>
       <Header>About</Header>
 
-      <Title>Hello, we are UGuide!</Title>
+      <Title>Hello, we are uGuide!</Title>
 
       <AboutContent>
         The UGuide Project is a personal side project created by me to study and

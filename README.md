@@ -126,5 +126,3 @@ React Router hooks like `useLocation()` only work within a Router context. To cl
 - UI polish and accessibility review
 
 ---
-
-If you want to use this README for a course submission, replace `<URL HERE>` with your demo link and adjust the “How to Run” section to match your exact folder names and scripts.
