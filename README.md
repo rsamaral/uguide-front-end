@@ -1,6 +1,6 @@
 # UGUIDE
 
-#### Video Demo: <URL HERE>
+#### Video Demo: [Video](https://youtu.be/OYetISGocJU)
 
 ## Description
 
