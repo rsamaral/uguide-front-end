@@ -1,7 +1,5 @@
 # UGUIDE
 
-#### Video Demo: [Video](https://youtu.be/OYetISGocJU)
-
 ## Description
 
 UGuide is a full-stack web application designed to connect **tour guides** and **tourists** through customizable tour packages. Guides can create and manage their own tour packages (title, description, date, city, time, price), while authenticated users can browse the platform and interact with available tours. The project was built to practice and demonstrate real-world full-stack development concepts, including **authentication**, **role-based access control**, **Redux state management**, and **client–server communication** over a REST API.
